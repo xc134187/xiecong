@@ -35,5 +35,6 @@
     <orderEntry type="library" name="SpringMVC" level="application" />
     <orderEntry type="library" name="Struts2" level="application" />
     <orderEntry type="library" name="Spring Web Services-2.0.2" level="project" />
+    <orderEntry type="library" name="lib" level="project" />
   </component>
 </module>
