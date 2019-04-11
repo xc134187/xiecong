@@ -1,6 +1,4 @@
-package Controller;
-
-import java.io.IOException;
+package se.Controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,5 +9,11 @@ public class HomeController {
     @RequestMapping("/Home")
     public String Home(Model model){
         return "index";
+    }
+
+    @RequestMapping("/")
+    public  String Root(Model model){
+        model.addAttribute("Title","HomePage");
+        return  "index";
     }
 }
