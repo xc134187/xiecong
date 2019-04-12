@@ -1,7 +1,14 @@
+/**
+ * @author: created by wwbweibo
+ * @version: 1.0
+ * @date: 2019/4/12
+ */
+
 package se.filter;
 
+import se.Model.User;
+
 import javax.servlet.*;
-import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -15,18 +22,15 @@ public class LoginFilter implements Filter {
     @Override
     public void doFilter(ServletRequest req, ServletResponse resp, FilterChain chain) throws ServletException, IOException {
         // 1.check session if user exits
-        HttpServletRequest httpRequest = (HttpServletRequest)req;
+        HttpServletRequest httpRequest = (HttpServletRequest) req;
 
         HttpSession session = httpRequest.getSession();
-        // todo change uid to user
-        String uid = (String)session.getAttribute("uid");
+        User user = (User) session.getAttribute("user");
 
-        System.out.println("uid ==" + uid);             //输出获得的session中属性的值
-        if(uid == null) {
-            HttpServletResponse response = (HttpServletResponse)resp;
+        if (user == null) {
+            HttpServletResponse response = (HttpServletResponse) resp;
             response.getWriter().write("<script>alert('Please Login to access this page')</script>");
-            return;
-        }else
+        } else
             chain.doFilter(req, resp);
     }
 
