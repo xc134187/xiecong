@@ -9,8 +9,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import se.Model.User;
 
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 @Controller
@@ -24,11 +26,12 @@ public class UserController {
      * @return FormMain if success, Login if false
      */
     @RequestMapping(value = "/User/Login", method = RequestMethod.POST)
-    public String Login(@RequestParam String username, @RequestParam String pwd) {
-        //Todo connect to database
-        boolean success = false;
+    public String Login(@RequestParam String username, @RequestParam String pwd, HttpSession session) {
+        User u = new User();
+        boolean success = u.Login();
 
         if (success) {
+            session.setAttribute("user", u);
             return "redirect:/FormMain";
         } else {
             return "redirect:/Login";
