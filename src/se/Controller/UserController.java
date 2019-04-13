@@ -28,6 +28,8 @@ public class UserController {
     @RequestMapping(value = "/User/Login", method = RequestMethod.POST)
     public String Login(@RequestParam String username, @RequestParam String pwd, HttpSession session) {
         User u = new User();
+        u.setUserId(username);
+        u.setPwd(pwd);
         boolean success = u.Login();
 
         if (success) {

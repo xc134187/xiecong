@@ -39,5 +39,7 @@
     <orderEntry type="library" name="com.fasterxml.jackson.core:jackson-annotations:2.9.8" level="project" />
     <orderEntry type="library" name="com.fasterxml.jackson.core:jackson-core:2.9.8" level="project" />
     <orderEntry type="library" name="com.fasterxml.jackson.core:jackson-databind:2.9.8" level="project" />
+    <orderEntry type="library" name="jdbc" level="application" />
+    <orderEntry type="library" name="org.mybatis:mybatis:3.5.1" level="project" />
   </component>
 </module>

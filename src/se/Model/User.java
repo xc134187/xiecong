@@ -6,10 +6,12 @@
 
 package se.Model;
 
+import se.utils.DbUtils;
+
 public class User {
     private String userId;
     private String userName;
-    private String pwd;
+    private String userPassword;
     private Role role;
     private UserCtl roleInfo;
 
@@ -48,17 +50,24 @@ public class User {
     }
 
     public String getPwd() {
-        return pwd;
+        return userPassword;
     }
 
     public void setPwd(String pwd) {
-        this.pwd = pwd;
+        this.userPassword = pwd;
     }
 
     // public function
     public Boolean Login() {
-        boolean success = false;
+        DbUtils utils = new DbUtils();
+        UserMapper userMapper = utils.session.getMapper(UserMapper.class);
+        User user = userMapper.Login(userId);
+        boolean success = (user != null && user.userPassword.equals(userPassword));
         if (success) {
+            this.userId = user.userId;
+            this.userName = user.userName;
+            this.role = user.role;
+            this.userPassword = user.userPassword;
             // if login success, get user's information
             getUserInfo();
         }
