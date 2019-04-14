@@ -1,7 +1,7 @@
 <!DOCTYPE html>
     <%@ page contentType="text/html;charset=UTF-8" language="java" %>
     <%@page isELIgnored="false" %>
-    <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+    <%--<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>--%>
     <html lang="zh" class="no-js">
     <head>
         <title>${Title}</title>
@@ -11,8 +11,28 @@
         <link rel="stylesheet" type="text/css" href="/css/demo.css" />
         <link rel="stylesheet" type="text/css" href="/css/style.css" />
         <link rel="stylesheet" type="text/css" href="/css/animate-custom.css" />
+        <script>
+            function loadXmlDoc() {
+                xhr = new XMLHttpRequest();
+                xhr.open("GET", "/Notify/Top?top=2", true);
+                xhr.send();
+                xhr.onreadystatechange = function (ev) {
+                    if(xhr.readyState==4 && xhr.status==200){
+                        var data = JSON.parse(xhr.responseText);
+                        var n = document.getElementById("notifications");
+                        for(var i =0; i <2;i++){
+                            var a = document.createElement("a");
+                            a.setAttribute("href", '/Notify/Notify/'+data[i].notificationId);
+                            a.innerText=data[i].title + '-' + new Date(data[i].time).toLocaleString();
+                            n.appendChild(a);
+                            n.appendChild(document.createElement("br"));
+                        }
+                    }
+                }
+            }
+        </script>
     </head>
-    <body>
+    <body onload="loadXmlDoc()">
         <div class="container">
             <header>
                 <h1>攀枝花学院课程设计管理系统</h1>
@@ -20,11 +40,11 @@
 					<span>点击 <strong>"news"</strong> 查看全部通知</span>
 					<a href="#">news</a>
                 </nav>
-                <div>
-                    <c:forEach items="${news}" var="news">
-                        <a href="news.link">news.name</a>
-                        <br/><br/>
-                    </c:forEach>
+                <div id="notifications">
+                    <%--<c:forEach items="${news}" var="news">--%>
+                        <%--<a href="news.link">news.name</a>--%>
+                        <%--<br/><br/>--%>
+                    <%--</c:forEach>--%>
                 </div>
             </header>
             <section>				

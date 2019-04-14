@@ -15,6 +15,8 @@ import se.Model.Mapper.NotificationMapper;
 import se.Model.Notification;
 import se.utils.DbUtils;
 
+import javax.net.ssl.HttpsURLConnection;
+import javax.servlet.http.HttpSession;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -46,11 +48,10 @@ public class NotifyController {
      */
     @RequestMapping("/Notify/Top")
     public @ResponseBody
-    List<Notification> TopNotify(@RequestParam int top) {
+    List<Notification> TopNotify(@RequestParam int top, HttpSession session) {
         DbUtils dbUtils = new DbUtils();
         NotificationMapper mapper = dbUtils.session.getMapper(NotificationMapper.class);
         List<Notification> notifications = mapper.selectTop(top);
-
         return notifications;
     }
 
