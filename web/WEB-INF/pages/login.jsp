@@ -1,11 +1,13 @@
 <!DOCTYPE html>
     <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+    <%@page isELIgnored="false" %>
+    <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
     <html lang="zh" class="no-js">
     <head>
         <title>${Title}</title>
         <meta charset="UTF-8" />
         <!-- <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">  -->
-        <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" type="text/css" href="/css/demo.css" />
         <link rel="stylesheet" type="text/css" href="/css/style.css" />
         <link rel="stylesheet" type="text/css" href="/css/animate-custom.css" />
@@ -19,9 +21,10 @@
 					<a href="#">news</a>
                 </nav>
                 <div>
-                    <a href="#">news1广东话不会的不会的事故发生的活动</a>
-                    <br/><br/>
-                    <a href="#">news2阿卡家具市场那就是农村</a>
+                    <c:forEach items="${news}" var="news">
+                        <a href="news.link">news.name</a>
+                        <br/><br/>
+                    </c:forEach>
                 </div>
             </header>
             <section>				
