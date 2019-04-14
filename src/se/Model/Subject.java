@@ -7,31 +7,31 @@
 package se.Model;
 
 public class Subject {
-    private String courseID;
-    private String courseName;
-    private String courseKind;
+    private String subjectId;
+    private String subjectName;
+    private String subjectKind;
 
-    public String getCourseID() {
-        return courseID;
+    public String getSubjectId() {
+        return subjectId;
     }
 
-    public void setCourseID(String courseID) {
-        this.courseID = courseID;
+    public void setSubjectId(String subjectId) {
+        this.subjectId = subjectId;
     }
 
-    public String getCourseName() {
-        return courseName;
+    public String getSubjectName() {
+        return subjectName;
     }
 
-    public void setCourseName(String courseName) {
-        this.courseName = courseName;
+    public void setSubjectName(String subjectName) {
+        this.subjectName = subjectName;
     }
 
-    public String getCourseKind() {
-        return courseKind;
+    public String getSubjectKind() {
+        return subjectKind;
     }
 
-    public void setCourseKind(String courseKind) {
-        this.courseKind = courseKind;
+    public void setSubjectKind(String subjectKind) {
+        this.subjectKind = subjectKind;
     }
 }

@@ -5,11 +5,14 @@
 
 <mapper namespace="se.Model.Mapper.SubjectMapper">
     <resultMap id="Subject" type="se.Model.Subject" >
-        <id column="CourseID" property="courseID" />
-        <result column="CourseName" property="courseName" />
-        <result column="CourseKind" property="courseKind" />
+        <id column="subject_id" property="subjectId" />
+        <result column="subject_name" property="subjectKind" />
+        <result column="subject_kind" property="subjectName" />
     </resultMap>
     <select id="SelectByTeacher" resultMap="Subject" >
-        select CourseID, CourseNAME, CourseKIND from Subject,teachers where teachers.TeacherNAME ==
+        select subject_id, subject_name, subject_kind from Users,Teachers, Teacher_Pub_Subject, Subjects
+        where Users.user_id = Teacher_Pub_Subject.user_id
+        and Teacher_Pub_Subject.subject_id = Teacher_Pub_Subject.subject_id
+        and Users.user_name = #{teacherName}
     </select>
 </mapper>

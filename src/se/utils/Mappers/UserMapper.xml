@@ -5,6 +5,6 @@
 
 <mapper namespace="se.Model.Mapper.UserMapper">
     <select id="Login" parameterType="string" resultType="se.Model.User" >
-        select * from user where  userid = #{userID};
+        select * from Users where user_id=#{userID}
     </select>
 </mapper>

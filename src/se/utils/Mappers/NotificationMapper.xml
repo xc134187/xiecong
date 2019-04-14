@@ -5,25 +5,25 @@
 
 <mapper namespace="se.Model.Mapper.NotificationMapper">
     <resultMap id="Notification" type="se.Model.Notification">
-        <id column="NotificationId" property="NotificationId" />
-        <result column="Title" property="title" />
+        <id column="notification_id" property="NotificationId" />
+        <result column="title" property="title" />
         <result column="context" property="context" />
-        <result column="publishTime" property="time" />
+        <result column="publish_time" property="time" />
     </resultMap>
 
     <select id="selectAll" resultMap="Notification" >
-        select * from Notification order by NotificationId desc ;
+        select * from Notiffcations order by notification_id desc ;
     </select>
 
     <select id="selectTop" parameterType="int" resultMap="Notification">
-        select * from Notification order by NotificationId desc limit #{num};
+        select * from Notiffcations order by notification_id desc limit #{num};
     </select>
 
     <select id="select" parameterType="int" resultType="se.Model.Notification">
-        select * from Notification where NotificationId=#{id};
+        select * from Notiffcations where notification_id=#{id};
     </select>
     <insert id="newNotification" parameterType="se.Model.Notification" >
-        INSERT INTO `mydb`.`Notification` (`Title`, `context`, `publishTime`)
+        INSERT INTO Notiffcations (`title`, `context`, `publish_time`)
         VALUES (#{title},#{context},#{time});
     </insert>
 </mapper>

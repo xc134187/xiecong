@@ -7,8 +7,8 @@
 package se.Model;
 
 public enum Role {
-    Student(1),
-    Teacher(2),
+    Teacher(1),
+    Student(2),
     Admin(3);
 
     private int value = 0;
@@ -18,9 +18,9 @@ public enum Role {
     public static Role valueOf(int value){
         switch (value){
             case 1:
-                return Student;
-            case 2:
                 return Teacher;
+            case 2:
+                return Student;
             case 3:
                 return Admin;
             default:
