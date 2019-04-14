@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="se.Model.Mapper.SubjectMapper">
+    <resultMap id="Subject" type="se.Model.Subject" >
+        <id column="CourseID" property="courseID" />
+        <result column="CourseName" property="courseName" />
+        <result column="CourseKind" property="courseKind" />
+    </resultMap>
+    <select id="SelectByTeacher" resultMap="Subject" >
+        select CourseID, CourseNAME, CourseKIND from Subject,teachers where teachers.TeacherNAME ==
+    </select>
+</mapper>

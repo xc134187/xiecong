@@ -37,6 +37,4 @@ public class Student implements UserCtl {
     public boolean ResetPwd() {
         return false;
     }
-
-
 }
