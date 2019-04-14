@@ -1,13 +1,14 @@
 <!DOCTYPE html>
+    <%@ page contentType="text/html;charset=UTF-8" language="java" %>
     <html lang="zh" class="no-js">
     <head>
-        <title>login</title>
+        <title>${Title}</title>
         <meta charset="UTF-8" />
         <!-- <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">  -->
         <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
-        <link rel="stylesheet" type="text/css" href="css/demo.css" />
-        <link rel="stylesheet" type="text/css" href="css/style.css" />
-        <link rel="stylesheet" type="text/css" href="css/animate-custom.css" />
+        <link rel="stylesheet" type="text/css" href="/css/demo.css" />
+        <link rel="stylesheet" type="text/css" href="/css/style.css" />
+        <link rel="stylesheet" type="text/css" href="/css/animate-custom.css" />
     </head>
     <body>
         <div class="container">
@@ -29,7 +30,7 @@
                     <a class="hiddenanchor" id="tologin"></a>
                     <div id="wrapper">
                         <div id="login" class="animate form">
-                            <form  action="mysuperscript.php" autocomplete="on"> 
+                            <form method="post" action="/User/Login" autocomplete="on">
                                 <h1>Log in</h1> 
                                 <p> 
                                     <label for="username" class="uname" data-icon="u" > username </label>
@@ -37,7 +38,7 @@
                                 </p>
                                 <p> 
                                     <label for="password" class="youpasswd" data-icon="p">password </label>
-                                    <input id="password" name="password" required="required" type="password" /> 
+                                    <input id="password" name="password" required="required" type="password" />
                                 </p>
                                 <p class="login button"> 
                                     <input type="submit" value="Login" /> 

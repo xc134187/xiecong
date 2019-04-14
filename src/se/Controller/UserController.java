@@ -22,14 +22,14 @@ public class UserController {
      * post back page for login form
      *
      * @param username username
-     * @param pwd      password
+     * @param password password
      * @return FormMain if success, Login if false
      */
     @RequestMapping(value = "/User/Login", method = RequestMethod.POST)
-    public String Login(@RequestParam String username, @RequestParam String pwd, HttpSession session) {
+    public String Login(@RequestParam String username, @RequestParam String password, HttpSession session) {
         User u = new User();
         u.setUserId(username);
-        u.setPwd(pwd);
+        u.setPwd(password);
         boolean success = u.Login();
 
         if (success) {

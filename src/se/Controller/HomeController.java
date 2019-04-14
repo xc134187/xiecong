@@ -45,6 +45,6 @@ public class HomeController {
     @RequestMapping("/Login")
     public String Login(Model model) {
         model.addAttribute("Title", "Login Page");
-        return "index";
+        return "login";
     }
 }
