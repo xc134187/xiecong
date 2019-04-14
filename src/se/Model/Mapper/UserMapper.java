@@ -4,7 +4,9 @@
  * @date: 2019/4/13
  */
 
-package se.Model;
+package se.Model.Mapper;
+
+import se.Model.User;
 
 public interface UserMapper {
     User Login(String userID);

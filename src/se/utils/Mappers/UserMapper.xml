@@ -3,7 +3,7 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="se.Model.UserMapper">
+<mapper namespace="se.Model.Mapper.UserMapper">
     <select id="Login" parameterType="string" resultType="se.Model.User" >
         select * from user where  userid = #{userID};
     </select>

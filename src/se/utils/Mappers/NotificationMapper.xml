@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="se.Model.Mapper.NotificationMapper">
+    <resultMap id="Notification" type="se.Model.Notification">
+        <id column="NotificationId" property="NotificationId" />
+        <result column="Title" property="title" />
+        <result column="context" property="context" />
+        <result column="publishTime" property="time" />
+    </resultMap>
+
+    <select id="selectAll" resultMap="Notification" >
+        select * from Notification order by NotificationId desc ;
+    </select>
+
+    <select id="selectTop" parameterType="int" resultMap="Notification">
+        select * from Notification order by NotificationId desc limit #{num};
+    </select>
+
+    <select id="select" parameterType="int" resultType="se.Model.Notification">
+        select * from Notification where NotificationId=#{id};
+    </select>
+    <insert id="newNotification" parameterType="se.Model.Notification" >
+        INSERT INTO `mydb`.`Notification` (`Title`, `context`, `publishTime`)
+        VALUES (#{title},#{context},#{time});
+    </insert>
+</mapper>

@@ -6,6 +6,7 @@
 
 package se.Model;
 
+import se.Model.Mapper.UserMapper;
 import se.utils.DbUtils;
 
 public class User {
