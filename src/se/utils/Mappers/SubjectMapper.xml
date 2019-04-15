@@ -8,11 +8,41 @@
         <id column="subject_id" property="subjectId" />
         <result column="subject_name" property="subjectKind" />
         <result column="subject_kind" property="subjectName" />
+        <result column="user_name" property="teacherName" />
+        <result column="user_id" property="teacherId" />
     </resultMap>
-    <select id="SelectByTeacher" resultMap="Subject" >
-        select subject_id, subject_name, subject_kind from Users,Teachers, Teacher_Pub_Subject, Subjects
+    <select id="SelectByTeacherName" resultMap="Subject" >
+        select Subjects.subject_id, subject_name, subject_kind, user_name, Users.user_id
+        from Users, Teacher_Pub_Subject, Subjects
         where Users.user_id = Teacher_Pub_Subject.user_id
-        and Teacher_Pub_Subject.subject_id = Teacher_Pub_Subject.subject_id
-        and Users.user_name = #{teacherName}
+        and Teacher_Pub_Subject.subject_id = Subjects.subject_id
+        and Users.user_name = #{teacherName};
     </select>
+
+    <select id="SelectByTeacherId" resultMap="Subject">
+        select Subjects.subject_id, subject_name, subject_kind, user_name, Users.user_id
+        from Users,Teacher_Pub_Subject, Subjects
+        where Teacher_Pub_Subject.subject_id=Subjects.subject_id
+        and Teacher_Pub_Subject.user_id = Users.user_id
+        and Teacher_Pub_Subject.user_id=#{teacherId} ;
+    </select>
+
+    <select id="SelectAllSub" resultMap="Subject">
+        SELECT Subjects.subject_id, subject_name, subject_kind, user_name
+        from Subjects,Users, Teacher_Pub_Subject
+        where Users.user_id = Teacher_Pub_Subject.user_id
+        and Teacher_Pub_Subject.subject_id = Subjects.subject_id;
+    </select>
+
+    <select id="SelectBySubjectId" resultType="se.Model.Subject">
+        select Subjects.subject_id,subject_name,subject_kind,user_name
+        from Subjects,Users, Teacher_Pub_Subject
+        where Teacher_Pub_Subject.user_id=Users.user_id
+        and Teacher_Pub_Subject.subject_id = Subjects.subject_id
+        and Subjects.subject_id = #{SubjectId};
+    </select>
+
+    <insert id="PubNewSubject" statementType="CALLABLE" parameterType="se.Model.Subject">
+        call insert_subject(#{subject_name}, #{subject_kind}, #{teacher_id});
+    </insert>
 </mapper>

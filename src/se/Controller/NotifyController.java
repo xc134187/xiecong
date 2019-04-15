@@ -6,6 +6,7 @@
 
 package se.Controller;
 
+import com.sun.xml.internal.ws.resources.HttpserverMessages;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -13,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import se.Model.Mapper.NotificationMapper;
 import se.Model.Notification;
+import se.Model.Role;
+import se.Model.User;
 import se.utils.DbUtils;
 
 import javax.net.ssl.HttpsURLConnection;
@@ -51,8 +54,7 @@ public class NotifyController {
     List<Notification> TopNotify(@RequestParam int top, HttpSession session) {
         DbUtils dbUtils = new DbUtils();
         NotificationMapper mapper = dbUtils.session.getMapper(NotificationMapper.class);
-        List<Notification> notifications = mapper.selectTop(top);
-        return notifications;
+        return mapper.selectTop(top);
     }
 
     /**
@@ -63,20 +65,22 @@ public class NotifyController {
      * @return if success redirect to /Notify, if false return null
      */
     @RequestMapping(value = "/Notify/New", method = RequestMethod.POST)
-    public String New(@RequestParam String title, @RequestParam String text) {
+    public String New(@RequestParam String title, @RequestParam String text, HttpSession session) {
         //todo: check the current user is admin
-        //todo: write to database
-        Date time = new Date();
-        Notification notification = new Notification();
-        notification.setTime(time);
-        notification.setTitle(title);
-        notification.setContext(text);
+        User user = (User)session.getAttribute("user");
+        if(user.getRole() == 3) {
+            Date time = new Date();
+            Notification notification = new Notification();
+            notification.setTime(time);
+            notification.setTitle(title);
+            notification.setContext(text);
+            DbUtils dbUtils = new DbUtils();
+            NotificationMapper mapper = dbUtils.session.getMapper(NotificationMapper.class);
+            mapper.newNotification(notification);
+            dbUtils.session.commit();
+            dbUtils.session.close();
 
-        DbUtils dbUtils = new DbUtils();
-        NotificationMapper mapper = dbUtils.session.getMapper(NotificationMapper.class);
-        mapper.newNotification(notification);
-        dbUtils.session.commit();
-        dbUtils.session.close();
+        }
         return null;
     }
 }

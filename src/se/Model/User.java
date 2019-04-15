@@ -13,7 +13,7 @@ public class User {
     private String userId;
     private String userName;
     private String userPassword;
-    private Role role;
+    private int role;
     private UserCtl roleInfo;
 
 
@@ -26,11 +26,11 @@ public class User {
         this.roleInfo = roleInfo;
     }
 
-    public Role getRole() {
+    public int getRole() {
         return role;
     }
 
-    public void setRole(Role role) {
+    public void setRole(int role) {
         this.role = role;
     }
 
@@ -63,6 +63,7 @@ public class User {
         DbUtils utils = new DbUtils();
         UserMapper userMapper = utils.session.getMapper(UserMapper.class);
         User user = userMapper.Login(userId);
+        // fixme: 返回的 role 值比在数据库中大1
         boolean success = (user != null && user.userPassword.equals(userPassword));
         if (success) {
             this.userId = user.userId;
@@ -77,9 +78,9 @@ public class User {
 
     //private function
     private void getUserInfo() {
-        if (role == Role.Student) {
+        if (role ==2) {
             this.roleInfo = new Student();
-        } else if (role == Role.Teacher) {
+        } else if (role == 1) {
             this.roleInfo = new Teacher();
         } else {
             this.roleInfo = new Admin();

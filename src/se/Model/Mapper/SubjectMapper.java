@@ -11,7 +11,9 @@ import se.Model.Subject;
 import java.util.List;
 
 public interface SubjectMapper {
-    List<Subject> SelectByTeacher(String teacherName);
+    List<Subject> SelectByTeacherName(String teacherName);
+    List<Subject> SelectByTeacherId(String teacherId);
+    List<Subject> SelectAllSub();
     Subject SelectBySubjectId(String SubjectId);
     int PubNewSubject(Subject subject);
 }

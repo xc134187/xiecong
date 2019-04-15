@@ -16,7 +16,7 @@ import org.apache.ibatis.session.defaults.DefaultSqlSessionFactory;
 import java.io.IOException;
 import java.io.InputStream;
 
-public class DbUtils {
+public class DbUtils<T> {
     public SqlSession session;
     public DbUtils(){
         InputStream inputStream;
@@ -31,6 +31,4 @@ public class DbUtils {
             }
         }
     }
-
-
 }

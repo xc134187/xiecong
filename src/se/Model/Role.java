@@ -11,8 +11,8 @@ public enum Role {
     Student(2),
     Admin(3);
 
-    private int value = 0;
-    private Role(int value){
+    private int value;
+    Role(int value){
         this.value = value;
     }
     public static Role valueOf(int value){
