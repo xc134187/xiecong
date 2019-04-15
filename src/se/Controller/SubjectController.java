@@ -7,13 +7,14 @@
 package se.Controller;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
+import se.Model.Mapper.SubjectMapper;
 import se.Model.Subject;
 import se.Model.User;
+import se.utils.DbUtils;
 
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 @Controller
 @RequestMapping("/Subject")
@@ -30,9 +31,49 @@ public class SubjectController {
             Subject subject = new Subject();
             subject.setSubjectName(subject_name);
             subject.setSubjectKind(subject_kind);
-            subject.setTeacherName(user.getUserId());
+            subject.setTeacherId(user.getUserId());
+
+            DbUtils dbUtils = new DbUtils();
+            SubjectMapper mapper = dbUtils.session.getMapper(SubjectMapper.class);
+            mapper.PubNewSubject(subject);
+
+            dbUtils.session.commit();
+            dbUtils.session.close();
         }else {
             return;
+        }
+    }
+
+    @RequestMapping("search_teacher_name")
+    @ResponseBody
+    public List<Subject> SelectSubjectByTeacherName(@RequestParam String teacher_name){
+        DbUtils dbUtils = new DbUtils();
+        SubjectMapper subjectMapper = dbUtils.session.getMapper(SubjectMapper.class);
+        return subjectMapper.SelectByTeacherName(teacher_name);
+    }
+
+    @RequestMapping("search_by_teacher_id")
+    @ResponseBody
+    public List<Subject> SelectSubjectByTeacherId(@RequestParam String teacher_id){
+        DbUtils dbUtils = new DbUtils();
+        SubjectMapper subjectMapper = dbUtils.session.getMapper(SubjectMapper.class);
+        return subjectMapper.SelectByTeacherId(teacher_id);
+    }
+
+
+    @ResponseBody
+    public List<Subject> SelectAllSubject(){
+        DbUtils dbUtils = new DbUtils();
+        SubjectMapper subjectMapper = dbUtils.session.getMapper(SubjectMapper.class);
+        return   subjectMapper.SelectAllSub();
+    }
+
+    @RequestMapping("update_subject")
+    public void UpdateSubject(@RequestParam Subject subject, HttpSession session){
+        User user = (User) session.getAttribute("user");
+        if(user!=null && user.getRole() == 1) {
+            DbUtils dbUtils = new DbUtils(SubjectMapper.class);
+            ((SubjectMapper)dbUtils.mapper).UpdateSubjectInfo(subject);
         }
     }
 }

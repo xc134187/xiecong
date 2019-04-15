@@ -14,6 +14,9 @@ public interface SubjectMapper {
     List<Subject> SelectByTeacherName(String teacherName);
     List<Subject> SelectByTeacherId(String teacherId);
     List<Subject> SelectAllSub();
-    Subject SelectBySubjectId(String SubjectId);
+    List<Subject> SelectBySubjectName(String subjectName);
+    List<Subject> SelectBySubjectType(String subjectType);
+    Subject SelectBySubjectId(String subjectId);
     int PubNewSubject(Subject subject);
+    int UpdateSubjectInfo(Subject subject);
 }

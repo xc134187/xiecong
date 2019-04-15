@@ -16,7 +16,7 @@
         from Users, Teacher_Pub_Subject, Subjects
         where Users.user_id = Teacher_Pub_Subject.user_id
         and Teacher_Pub_Subject.subject_id = Subjects.subject_id
-        and Users.user_name = #{teacherName};
+        and Users.user_name like '%${teacherName}%';
     </select>
 
     <select id="SelectByTeacherId" resultMap="Subject">
@@ -34,15 +34,36 @@
         and Teacher_Pub_Subject.subject_id = Subjects.subject_id;
     </select>
 
-    <select id="SelectBySubjectId" resultType="se.Model.Subject">
+    <select id="SelectBySubjectId" resultMap="Subject">
         select Subjects.subject_id,subject_name,subject_kind,user_name
         from Subjects,Users, Teacher_Pub_Subject
         where Teacher_Pub_Subject.user_id=Users.user_id
         and Teacher_Pub_Subject.subject_id = Subjects.subject_id
-        and Subjects.subject_id = #{SubjectId};
+        and Subjects.subject_id = #{subjectId};
+    </select>
+
+    <select id="SelectBySubjectName" resultMap="Subject">
+        select Subjects.subject_id,subject_name,subject_kind,user_name
+        from Subjects,Users, Teacher_Pub_Subject
+        where Teacher_Pub_Subject.user_id=Users.user_id
+        and Teacher_Pub_Subject.subject_id = Subjects.subject_id
+        and Subjects.subject_name like  '%${subjectName}%';
+    </select>
+
+    <select id="SelectBySubjectType" resultMap="Subject">
+        select Subjects.subject_id,subject_name,subject_kind,user_name
+        from Subjects,Users, Teacher_Pub_Subject
+        where Teacher_Pub_Subject.user_id=Users.user_id
+        and Teacher_Pub_Subject.subject_id = Subjects.subject_id
+        and Subjects.subject_kind like '%${subjectType}%';
     </select>
 
     <insert id="PubNewSubject" statementType="CALLABLE" parameterType="se.Model.Subject">
-        call insert_subject(#{subject_name}, #{subject_kind}, #{teacher_id});
+        call insert_subject(#{subjectName}, #{subjectKind}, #{teacherId});
     </insert>
+
+    <update id="UpdateSubjectInfo" parameterType="se.Model.Subject">
+        update Subjects set subject_name=#{subjectName}, subject_kind=#{subjectKind} where subject_id = #{subjectId};
+    </update>
+
 </mapper>

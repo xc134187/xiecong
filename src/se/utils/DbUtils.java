@@ -18,7 +18,8 @@ import java.io.InputStream;
 
 public class DbUtils<T> {
     public SqlSession session;
-    public DbUtils(){
+    public T mapper;
+    public DbUtils(Class<T> tClass){
         InputStream inputStream;
         {
             try {
@@ -26,6 +27,7 @@ public class DbUtils<T> {
                 inputStream = Resources.getResourceAsStream(resource);
                 SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
                 session = sqlSessionFactory.openSession();
+                mapper = session.getMapper(tClass);
             } catch (IOException e) {
                 e.printStackTrace();
             }
