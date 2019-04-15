@@ -60,9 +60,8 @@ public class User {
 
     // public function
     public Boolean Login() {
-        DbUtils utils = new DbUtils();
-        UserMapper userMapper = utils.session.getMapper(UserMapper.class);
-        User user = userMapper.Login(userId);
+        DbUtils utils = new DbUtils(UserMapper.class);
+        User user = ((UserMapper)utils.mapper).Login(userId);
         // fixme: 返回的 role 值比在数据库中大1
         boolean success = (user != null && user.userPassword.equals(userPassword));
         if (success) {

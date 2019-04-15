@@ -33,10 +33,9 @@ public class SubjectController {
             subject.setSubjectKind(subject_kind);
             subject.setTeacherId(user.getUserId());
 
-            DbUtils dbUtils = new DbUtils();
-            SubjectMapper mapper = dbUtils.session.getMapper(SubjectMapper.class);
-            mapper.PubNewSubject(subject);
-
+            DbUtils dbUtils = new DbUtils(SubjectMapper.class);
+            ((SubjectMapper)dbUtils.mapper).PubNewSubject(subject);
+            
             dbUtils.session.commit();
             dbUtils.session.close();
         }else {
@@ -47,25 +46,22 @@ public class SubjectController {
     @RequestMapping("search_teacher_name")
     @ResponseBody
     public List<Subject> SelectSubjectByTeacherName(@RequestParam String teacher_name){
-        DbUtils dbUtils = new DbUtils();
-        SubjectMapper subjectMapper = dbUtils.session.getMapper(SubjectMapper.class);
-        return subjectMapper.SelectByTeacherName(teacher_name);
+        DbUtils dbUtils = new DbUtils(SubjectMapper.class);
+        return ((SubjectMapper)dbUtils.mapper).SelectByTeacherName(teacher_name);
     }
 
     @RequestMapping("search_by_teacher_id")
     @ResponseBody
     public List<Subject> SelectSubjectByTeacherId(@RequestParam String teacher_id){
-        DbUtils dbUtils = new DbUtils();
-        SubjectMapper subjectMapper = dbUtils.session.getMapper(SubjectMapper.class);
-        return subjectMapper.SelectByTeacherId(teacher_id);
+        DbUtils dbUtils = new DbUtils(SubjectMapper.class);
+        return ((SubjectMapper)dbUtils.mapper).SelectByTeacherId(teacher_id);
     }
 
 
     @ResponseBody
     public List<Subject> SelectAllSubject(){
-        DbUtils dbUtils = new DbUtils();
-        SubjectMapper subjectMapper = dbUtils.session.getMapper(SubjectMapper.class);
-        return   subjectMapper.SelectAllSub();
+        DbUtils dbUtils = new DbUtils(SubjectMapper.class);
+        return ((SubjectMapper)dbUtils.mapper).SelectAllSub();
     }
 
     @RequestMapping("update_subject")

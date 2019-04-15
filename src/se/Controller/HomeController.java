@@ -12,16 +12,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 public class HomeController {
-    /**
-     * root path
-     *
-     * @param model
-     * @return
-     */
+
     @RequestMapping("/")
-    public String Root(Model model) {
-        model.addAttribute("Title", "HomePage");
-        return "index";
+    public String Root() {
+        return "redirect:/Login";
     }
 
     /**

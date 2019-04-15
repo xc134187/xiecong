@@ -37,9 +37,8 @@ public class NotifyController {
      */
     @RequestMapping("/Notify")
     public String AllNotify() {
-        DbUtils dbUtils = new DbUtils();
-        NotificationMapper mapper = dbUtils.session.getMapper(NotificationMapper.class);
-        List<Notification> notifications = mapper.selectAll();
+        DbUtils dbUtils = new DbUtils(NotificationMapper.class);
+        List<Notification> notifications = ((NotificationMapper)dbUtils.mapper).selectAll();
         return null;
     }
 
@@ -52,9 +51,8 @@ public class NotifyController {
     @RequestMapping("/Notify/Top")
     public @ResponseBody
     List<Notification> TopNotify(@RequestParam int top, HttpSession session) {
-        DbUtils dbUtils = new DbUtils();
-        NotificationMapper mapper = dbUtils.session.getMapper(NotificationMapper.class);
-        return mapper.selectTop(top);
+        DbUtils dbUtils = new DbUtils(NotificationMapper.class);
+        return ((NotificationMapper)dbUtils.mapper).selectTop(top);
     }
 
     /**
@@ -74,9 +72,10 @@ public class NotifyController {
             notification.setTime(time);
             notification.setTitle(title);
             notification.setContext(text);
-            DbUtils dbUtils = new DbUtils();
-            NotificationMapper mapper = dbUtils.session.getMapper(NotificationMapper.class);
-            mapper.newNotification(notification);
+
+            DbUtils dbUtils = new DbUtils(NotificationMapper.class);
+            ((NotificationMapper)dbUtils.mapper).newNotification(notification);
+
             dbUtils.session.commit();
             dbUtils.session.close();
 
