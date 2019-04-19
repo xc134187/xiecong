@@ -12,11 +12,13 @@ public enum Role {
     Admin(3);
 
     private int value;
-    Role(int value){
+
+    Role(int value) {
         this.value = value;
     }
-    public static Role valueOf(int value){
-        switch (value){
+
+    public static Role valueOf(int value) {
+        switch (value) {
             case 1:
                 return Teacher;
             case 2:
@@ -27,7 +29,8 @@ public enum Role {
                 return null;
         }
     }
-    public int getValue(){
+
+    public int getValue() {
         return value;
     }
 }

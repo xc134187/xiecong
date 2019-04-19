@@ -5,12 +5,14 @@
 
 <mapper namespace="se.Model.Mapper.UserMapper">
     <resultMap id="User" type="se.Model.User">
-        <id column="user_id" property="userId" />
-        <result column="user_name" property="userName" />
-        <result column="user_password" property="userPassword" />
-        <result column="role" property="role" />
+        <id column="user_id" property="userId"/>
+        <result column="user_name" property="userName"/>
+        <result column="user_password" property="userPassword"/>
+        <result column="role" property="role"/>
     </resultMap>
-    <select id="Login" parameterType="string" resultMap="User" >
-        select * from Users where user_id=#{userID}
+    <select id="Login" parameterType="string" resultMap="User">
+        select *
+        from Users
+        where user_id = #{userID}
     </select>
 </mapper>

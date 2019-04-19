@@ -6,8 +6,6 @@
 
 package se.Model;
 
-import org.omg.CosNaming.NamingContextExtPackage.StringNameHelper;
-
 public class Subject {
     private String subjectId;
     private String subjectName;

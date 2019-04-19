@@ -12,11 +12,24 @@ import java.util.List;
 
 public interface SubjectMapper {
     List<Subject> SelectByTeacherName(String teacherName);
+
     List<Subject> SelectByTeacherId(String teacherId);
+
     List<Subject> SelectAllSub();
+
     List<Subject> SelectBySubjectName(String subjectName);
+
     List<Subject> SelectBySubjectType(String subjectType);
-    Subject SelectBySubjectId(String subjectId);
+
+    Subject SelectBySubjectId(int subjectId);
+
+    int SelectMaxSelectNum(int subjectId);
+
+    int SelectCurrSelectNum(int subjectId);
+
     int PubNewSubject(Subject subject);
+
     int UpdateSubjectInfo(Subject subject);
+
+    int StudentSelectSubject(int subjectId, String userId);
 }

@@ -4,13 +4,50 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="se.Model.Mapper.StudentMapper">
+    <resultMap id="Grade" type="se.Model.Grade">
+        <result column="grade_normal" property="grade_normal"/>
+        <result column="grade_final" property="grade_final"/>
+        <result column="grade_selfjudge" property="grade_selfjudge"/>
+        <result column="user_id" property="user_id"/>
+        <result column="user_name" property="user_name"/>
+        <result column="subject_id" property="subject_id"/>
+        <result column="subject_name" property="subject_name"/>
+    </resultMap>
+    <update id="SelfJudge">
+        update Student_select_subject
+        set grade_selfjudge = #{0}
+        where user_id = #{1}
+          and subject_id = #{2};
+    </update>
     <update id="CheckIn" parameterType="string">
-      update Check_in set today_checked_in = 1 where user_id=#{userid};
+        update Check_in
+        set today_checked_in = 1
+        where user_id = #{userid};
     </update>
     <update id="CheckOut" parameterType="string">
-        update Check_in set today_checked_in = false, times = times +1 where  user_id = #{userid};
+        update Check_in
+        set today_checked_in = false,
+            times            = times + 1
+        where user_id = #{userid};
     </update>
     <select id="IsTodayCheckedIn" resultType="boolean">
-      select today_checked_in from Check_in where user_id=#{userid};
+        select today_checked_in
+        from Check_in
+        where user_id = #{userid};
+    </select>
+    <select id="QueryGrade" parameterType="string" resultMap="Grade">
+        select grade_normal,
+               grade_selfjudge,
+               grade__final,
+               user_name,
+               Student_select_subject.user_id,
+               Student_select_subject.subject_id,
+               subject_name
+        from Student_select_subject,
+             Subjects,
+             Users
+        where Subjects.subject_id = Student_select_subject.subject_id
+          and Users.user_id = Student_select_subject.user_id
+          and Student_select_subject.user_id = #{userId};
     </select>
 </mapper>

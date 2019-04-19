@@ -12,8 +12,11 @@ import java.util.List;
 
 public interface NotificationMapper {
     List<Notification> selectAll();
+
     List<Notification> selectTop(int num);
+
     Notification select(int id);
+
     void newNotification(Notification notification);
 
 }

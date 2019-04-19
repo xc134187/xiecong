@@ -9,6 +9,11 @@ package se.Model;
 import java.util.Date;
 
 public class Notification {
+    private int NotificationId;
+    private String title;
+    private String context;
+    private Date time;
+
     public int getNotificationId() {
         return NotificationId;
     }
@@ -40,9 +45,4 @@ public class Notification {
     public void setTime(Date time) {
         this.time = time;
     }
-
-    private int NotificationId;
-    private String title;
-    private String context;
-    private Date time;
 }

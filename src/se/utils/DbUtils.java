@@ -6,12 +6,10 @@
 
 package se.utils;
 
-import com.mysql.cj.Session;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
-import org.apache.ibatis.session.defaults.DefaultSqlSessionFactory;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -19,7 +17,8 @@ import java.io.InputStream;
 public class DbUtils<T> {
     public SqlSession session;
     public T mapper;
-    public DbUtils(Class<T> tClass){
+
+    public DbUtils(Class<T> tClass) {
         InputStream inputStream;
         {
             try {

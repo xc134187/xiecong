@@ -4,76 +4,136 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="se.Model.Mapper.SubjectMapper">
-    <resultMap id="Subject" type="se.Model.Subject" >
-        <id column="subject_id" property="subjectId" />
-        <result column="subject_name" property="subjectKind" />
-        <result column="subject_kind" property="subjectName" />
-        <result column="user_name" property="teacherName" />
-        <result column="user_id" property="teacherId" />
+    <resultMap id="Subject" type="se.Model.Subject">
+        <id column="subject_id" property="subjectId"/>
+        <result column="subject_name" property="subjectKind"/>
+        <result column="subject_kind" property="subjectName"/>
+        <result column="user_name" property="teacherName"/>
+        <result column="user_id" property="teacherId"/>
         <result column="max_select_num" property="maxSelectNum"/>
-        <result column="curr_select_num" property="currSelectNum" />
+        <result column="curr_select_num" property="currSelectNum"/>
     </resultMap>
-    <select id="SelectByTeacherName" resultMap="Subject" >
-        select Subjects.subject_id, subject_name, subject_kind, user_name, Users.user_id,
-               max_select_num, curr_select_num
-        from Users, Teacher_Pub_Subject, Subjects
+    <select id="SelectByTeacherName" resultMap="Subject">
+        select Subjects.subject_id,
+               subject_name,
+               subject_kind,
+               user_name,
+               Users.user_id,
+               max_select_num,
+               curr_select_num
+        from Users,
+             Teacher_Pub_Subject,
+             Subjects
         where Users.user_id = Teacher_Pub_Subject.user_id
-        and Teacher_Pub_Subject.subject_id = Subjects.subject_id
-        and Users.user_name like '%${teacherName}%';
+          and Teacher_Pub_Subject.subject_id = Subjects.subject_id
+          and Users.user_name like '%${teacherName}%';
     </select>
 
     <select id="SelectByTeacherId" resultMap="Subject">
-        select Subjects.subject_id, subject_name, subject_kind, user_name, Users.user_id,
-               max_select_num, curr_select_num
-        from Users,Teacher_Pub_Subject, Subjects
-        where Teacher_Pub_Subject.subject_id=Subjects.subject_id
-        and Teacher_Pub_Subject.user_id = Users.user_id
-        and Teacher_Pub_Subject.user_id=#{teacherId} ;
+        select Subjects.subject_id,
+               subject_name,
+               subject_kind,
+               user_name,
+               Users.user_id,
+               max_select_num,
+               curr_select_num
+        from Users,
+             Teacher_Pub_Subject,
+             Subjects
+        where Teacher_Pub_Subject.subject_id = Subjects.subject_id
+          and Teacher_Pub_Subject.user_id = Users.user_id
+          and Teacher_Pub_Subject.user_id = #{teacherId};
     </select>
 
     <select id="SelectAllSub" resultMap="Subject">
-        SELECT Subjects.subject_id, subject_name, subject_kind, user_name, Users.user_id,
-               max_select_num, curr_select_num
-        from Subjects,Users, Teacher_Pub_Subject
+        SELECT Subjects.subject_id,
+               subject_name,
+               subject_kind,
+               user_name,
+               Users.user_id,
+               max_select_num,
+               curr_select_num
+        from Subjects,
+             Users,
+             Teacher_Pub_Subject
         where Users.user_id = Teacher_Pub_Subject.user_id
-        and Teacher_Pub_Subject.subject_id = Subjects.subject_id;
+          and Teacher_Pub_Subject.subject_id = Subjects.subject_id;
     </select>
 
     <select id="SelectBySubjectId" resultMap="Subject">
-        select Subjects.subject_id, subject_name, subject_kind, user_name, Users.user_id,
-               max_select_num, curr_select_num
-        from Subjects,Users, Teacher_Pub_Subject
-        where Teacher_Pub_Subject.user_id=Users.user_id
-        and Teacher_Pub_Subject.subject_id = Subjects.subject_id
-        and Subjects.subject_id = #{subjectId};
+        select Subjects.subject_id,
+               subject_name,
+               subject_kind,
+               user_name,
+               Users.user_id,
+               max_select_num,
+               curr_select_num
+        from Subjects,
+             Users,
+             Teacher_Pub_Subject
+        where Teacher_Pub_Subject.user_id = Users.user_id
+          and Teacher_Pub_Subject.subject_id = Subjects.subject_id
+          and Subjects.subject_id = #{subjectId};
     </select>
 
     <select id="SelectBySubjectName" resultMap="Subject">
-        select Subjects.subject_id,subject_name,subject_kind,user_name,Users.user_id,
-               max_select_num, curr_select_num
-        from Subjects,Users, Teacher_Pub_Subject
-        where Teacher_Pub_Subject.user_id=Users.user_id
-        and Teacher_Pub_Subject.subject_id = Subjects.subject_id
-        and Subjects.subject_name like  '%${subjectName}%';
+        select Subjects.subject_id,
+               subject_name,
+               subject_kind,
+               user_name,
+               Users.user_id,
+               max_select_num,
+               curr_select_num
+        from Subjects,
+             Users,
+             Teacher_Pub_Subject
+        where Teacher_Pub_Subject.user_id = Users.user_id
+          and Teacher_Pub_Subject.subject_id = Subjects.subject_id
+          and Subjects.subject_name like '%${subjectName}%';
     </select>
 
     <select id="SelectBySubjectType" resultMap="Subject">
-        select Subjects.subject_id,subject_name,subject_kind,user_name,Users.user_id,
-               max_select_num, curr_select_num
-        from Subjects,Users, Teacher_Pub_Subject
-        where Teacher_Pub_Subject.user_id=Users.user_id
-        and Teacher_Pub_Subject.subject_id = Subjects.subject_id
-        and Subjects.subject_kind like '%${subjectType}%';
+        select Subjects.subject_id,
+               subject_name,
+               subject_kind,
+               user_name,
+               Users.user_id,
+               max_select_num,
+               curr_select_num
+        from Subjects,
+             Users,
+             Teacher_Pub_Subject
+        where Teacher_Pub_Subject.user_id = Users.user_id
+          and Teacher_Pub_Subject.subject_id = Subjects.subject_id
+          and Subjects.subject_kind like '%${subjectType}%';
+    </select>
+
+    <select id="SelectMaxSelectNum" resultType="int">
+        select max_select_num
+        from Subjects
+        where subject_id = #{subjectId};
+    </select>
+
+    <select id="SelectCurrSelectNum" resultType="int">
+        select curr_select_num
+        from Subjects
+        where subject_id = #{subjectId};
     </select>
 
     <insert id="PubNewSubject" statementType="CALLABLE" parameterType="se.Model.Subject">
         call insert_subject(#{subjectName}, #{subjectKind}, #{teacherId});
     </insert>
 
+    <insert id="StudentSelectSubject" statementType="CALLABLE">
+        call se.Student_select_subject(#{0}, #{1});
+    </insert>
+
     <update id="UpdateSubjectInfo" parameterType="se.Model.Subject">
         update Subjects
-        set subject_name=#{subjectName}, subject_kind=#{subjectKind}, max_select_num=#{maxSelectNum},
-            curr_select_num=#{currSelectNum}
+        set subject_name    = #{subjectName},
+            subject_kind    = #{subjectKind},
+            max_select_num  = #{maxSelectNum},
+            curr_select_num = #{currSelectNum}
         where subject_id = #{subjectId};
     </update>
 

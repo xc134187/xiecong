@@ -61,7 +61,7 @@ public class User {
     // public function
     public Boolean Login() {
         DbUtils utils = new DbUtils(UserMapper.class);
-        User user = ((UserMapper)utils.mapper).Login(userId);
+        User user = ((UserMapper) utils.mapper).Login(userId);
         // fixme: 返回的 role 值比在数据库中大1
         boolean success = (user != null && user.userPassword.equals(userPassword));
         if (success) {
@@ -77,7 +77,7 @@ public class User {
 
     //private function
     private void getUserInfo() {
-        if (role ==2) {
+        if (role == 2) {
             this.roleInfo = new Student();
         } else if (role == 1) {
             this.roleInfo = new Teacher();

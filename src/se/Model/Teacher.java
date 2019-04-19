@@ -7,9 +7,10 @@
 package se.Model;
 
 public class Teacher implements UserCtl {
-    public void PubSubject(){
+    public void PubSubject() {
 
     }
+
     @Override
     public void GetUserInfo() {
 
