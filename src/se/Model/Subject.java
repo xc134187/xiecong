@@ -14,7 +14,24 @@ public class Subject {
     private String subjectKind;
     private String teacherName;
     private String teacherId;
+    private int maxSelectNum;
+    private int currSelectNum;
 
+    public int getMaxSelectNum() {
+        return maxSelectNum;
+    }
+
+    public void setMaxSelectNum(int maxSelectNum) {
+        this.maxSelectNum = maxSelectNum;
+    }
+
+    public int getCurrSelectNum() {
+        return currSelectNum;
+    }
+
+    public void setCurrSelectNum(int currSelectNum) {
+        this.currSelectNum = currSelectNum;
+    }
 
     public String getTeacherId() {
         return teacherId;

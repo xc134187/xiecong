@@ -10,9 +10,12 @@
         <result column="subject_kind" property="subjectName" />
         <result column="user_name" property="teacherName" />
         <result column="user_id" property="teacherId" />
+        <result column="max_select_num" property="maxSelectNum"/>
+        <result column="curr_select_num" property="currSelectNum" />
     </resultMap>
     <select id="SelectByTeacherName" resultMap="Subject" >
-        select Subjects.subject_id, subject_name, subject_kind, user_name, Users.user_id
+        select Subjects.subject_id, subject_name, subject_kind, user_name, Users.user_id,
+               max_select_num, curr_select_num
         from Users, Teacher_Pub_Subject, Subjects
         where Users.user_id = Teacher_Pub_Subject.user_id
         and Teacher_Pub_Subject.subject_id = Subjects.subject_id
@@ -20,7 +23,8 @@
     </select>
 
     <select id="SelectByTeacherId" resultMap="Subject">
-        select Subjects.subject_id, subject_name, subject_kind, user_name, Users.user_id
+        select Subjects.subject_id, subject_name, subject_kind, user_name, Users.user_id,
+               max_select_num, curr_select_num
         from Users,Teacher_Pub_Subject, Subjects
         where Teacher_Pub_Subject.subject_id=Subjects.subject_id
         and Teacher_Pub_Subject.user_id = Users.user_id
@@ -28,14 +32,16 @@
     </select>
 
     <select id="SelectAllSub" resultMap="Subject">
-        SELECT Subjects.subject_id, subject_name, subject_kind, user_name
+        SELECT Subjects.subject_id, subject_name, subject_kind, user_name, Users.user_id,
+               max_select_num, curr_select_num
         from Subjects,Users, Teacher_Pub_Subject
         where Users.user_id = Teacher_Pub_Subject.user_id
         and Teacher_Pub_Subject.subject_id = Subjects.subject_id;
     </select>
 
     <select id="SelectBySubjectId" resultMap="Subject">
-        select Subjects.subject_id,subject_name,subject_kind,user_name
+        select Subjects.subject_id, subject_name, subject_kind, user_name, Users.user_id,
+               max_select_num, curr_select_num
         from Subjects,Users, Teacher_Pub_Subject
         where Teacher_Pub_Subject.user_id=Users.user_id
         and Teacher_Pub_Subject.subject_id = Subjects.subject_id
@@ -43,7 +49,8 @@
     </select>
 
     <select id="SelectBySubjectName" resultMap="Subject">
-        select Subjects.subject_id,subject_name,subject_kind,user_name
+        select Subjects.subject_id,subject_name,subject_kind,user_name,Users.user_id,
+               max_select_num, curr_select_num
         from Subjects,Users, Teacher_Pub_Subject
         where Teacher_Pub_Subject.user_id=Users.user_id
         and Teacher_Pub_Subject.subject_id = Subjects.subject_id
@@ -51,7 +58,8 @@
     </select>
 
     <select id="SelectBySubjectType" resultMap="Subject">
-        select Subjects.subject_id,subject_name,subject_kind,user_name
+        select Subjects.subject_id,subject_name,subject_kind,user_name,Users.user_id,
+               max_select_num, curr_select_num
         from Subjects,Users, Teacher_Pub_Subject
         where Teacher_Pub_Subject.user_id=Users.user_id
         and Teacher_Pub_Subject.subject_id = Subjects.subject_id
@@ -63,7 +71,10 @@
     </insert>
 
     <update id="UpdateSubjectInfo" parameterType="se.Model.Subject">
-        update Subjects set subject_name=#{subjectName}, subject_kind=#{subjectKind} where subject_id = #{subjectId};
+        update Subjects
+        set subject_name=#{subjectName}, subject_kind=#{subjectKind}, max_select_num=#{maxSelectNum},
+            curr_select_num=#{currSelectNum}
+        where subject_id = #{subjectId};
     </update>
 
 </mapper>

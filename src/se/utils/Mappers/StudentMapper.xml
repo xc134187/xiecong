@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="se.Model.Mapper.StudentMapper">
+    <update id="CheckIn" parameterType="string">
+      update Check_in set today_checked_in = 1 where user_id=#{userid};
+    </update>
+    <update id="CheckOut" parameterType="string">
+        update Check_in set today_checked_in = false, times = times +1 where  user_id = #{userid};
+    </update>
+    <select id="IsTodayCheckedIn" resultType="boolean">
+      select today_checked_in from Check_in where user_id=#{userid};
+    </select>
+</mapper>
