@@ -6,9 +6,49 @@
 
 package se.Model;
 
+import se.Model.Mapper.StudentMapper;
+import se.utils.DbUtils;
+
+import java.security.PublicKey;
+
 public class Student implements UserCtl {
+    String tclass;
+    String sex;
+    String userId;
+
     // constructor
     public Student() {
+    }
+    public Student(String userId){
+        this.userId = userId;
+        GetUserInfo();
+    }
+
+    // getter and setter
+
+
+    public String getTclass() {
+        return tclass;
+    }
+
+    public void setTclass(String tclass) {
+        this.tclass = tclass;
+    }
+
+    public String getSex() {
+        return sex;
+    }
+
+    public void setSex(String sex) {
+        this.sex = sex;
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 
     // public method
@@ -26,6 +66,10 @@ public class Student implements UserCtl {
 
     @Override
     public void GetUserInfo() {
+        DbUtils<StudentMapper> dbUtils = new DbUtils<>(StudentMapper.class);
+        Student student = dbUtils.mapper.QuerySelfInfo(userId);
+        this.tclass = student.tclass;
+        this.sex = student.sex;
     }
 
     @Override

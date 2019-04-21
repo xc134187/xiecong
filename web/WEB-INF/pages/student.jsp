@@ -1,10 +1,11 @@
-<!DOCTYPE html">
+<!DOCTYPE html>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <link rel="stylesheet" href="./css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
 </head>
 <style>
     body {
@@ -58,7 +59,10 @@
         transition: .5s border;
     }
 </style>
-
+<script src="/js/jquery-3.3.1.min.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/popper.min.js"></script>
+<script src="/js/ajax.js"></script>
 <body>
 
     <div class="page-header">
@@ -72,22 +76,26 @@
             <div class="student-container">
                 <div class="left">
                     <div style="width:100%;text-align: center;">
-                        <img src="./img/443625372.jpeg" class="img-thumbnail" style="width:50%;margin-top: 30px;"
+                        <img src="/images/443625372.jpeg" class="img-thumbnail" style="width:50%;margin-top: 30px;"
                             alt="error">
                     </div>
                     <div style="text-align:center;">
                         <br />
-                        <span><a href="#">签到</a></span>
+                        <span>
+                            <button id="btn-check-in"
+                                    class="btn btn-block"
+                            onclick="ajax('/User/Checkin', CheckInCallback, 'GET')">签到</button>
+                        </span>
                         <br />
-                        <span>姓名:</span>
+                        <span>姓名：${user.userName}</span>
                         <br />
-                        <span>学号:</span>
+                        <span>学号：${user.userId}</span>
                         <br />
-                        <span>学院:</span>
+                        <span>性别：${user.roleInfo.sex}</span>
                         <br />
-                        <span>专业:</span>
+                        <span>班级：${user.roleInfo.tclass}</span>
                         <br />
-                        <span><a href="#">退出登录</a></span>
+                        <span><a href="/Signout">退出登录</a></span>
                     </div>
 
                 </div>
@@ -107,32 +115,42 @@
 
                         <!-- Tab panes -->
                         <div class="tab-content">
+                            <%--选题页面--%>
                             <div role="tabpanel" class="tab-pane fade in active" id="home">
                                 <br />
                                 <div class="panel panel-default">
-                                    <div class="panel-heading">课题选择区域</div>
-                                    <div class="panel-body">
-                                        <p>请选择课题，每人限选一门课题，重复选择，以第二次为准</p>
+                                    <div class="panel-heading">
+                                        <div id="ctrl-panel" class="row">
+                                            <input type="hidden" id="subject-id">
+                                            <span id="subject-name" class="col-xs-4">课程名称</span>
+                                            <span id="subject-teacher" class="col-xs-4">指导教师</span>
+                                            <span class="col-xs-4">
+                                                <button onclick="selectSubject()" class="btn btn-default">选择</button>
+                                            </span>
+                                        </div>
                                     </div>
-
-                                    <!-- Table -->
-                                    <table class="table">
-                                        <tr>
-                                            <td>课题名称</td>
-                                            <td>操作</td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                我是课题
-                                            </td>
-                                            <td>
-                                                <button class="btn-primary">选择
-                                                </button>
-                                            </td>
-                                        </tr>
-
-                                    </table>
-
+                                    <div class="panel-body">
+                                        <div class="row">
+                                            <div class="col-xs-2">
+                                                <ul id="teacher-list"
+                                                    class="list-group">
+                                                </ul>
+                                            </div>
+                                            <div class="col-xs-10">
+                                                <table id="subject-list" class="table table-bordered table-striped">
+                                                    <thead>
+                                                    <tr>
+                                                        <td>题目名称</td>
+                                                        <td>类型</td>
+                                                        <td>指导教师</td>
+                                                        <td>可选人数</td>
+                                                        <td>已选人数</td>
+                                                    </tr>
+                                                    </thead>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                             <div role="tabpanel" class="tab-pane" id="result"><br />
@@ -225,9 +243,6 @@
     </div>
 
 </body>
-<script src="./js/jquery-3.3.1.min.js"></script>
-<script src="./js/bootstrap.min.js"></script>
-<script src="./js/popper.min.js"></script>
 <script>
     var tabList = $("#myTabs");
 
@@ -247,7 +262,8 @@
 
         e.className = "active";
 
-    }
+    };
+    ajax('/User/AllTeacher', QueryTeacherCallback, 'GET');
 
     //foo();
 </script>

@@ -7,8 +7,20 @@
 package se.Model;
 
 public class Teacher implements UserCtl {
-    public void PubSubject() {
+    String userId;
 
+    public Teacher(){}
+
+    public Teacher(String userid){
+        this.userId = userid;
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 
     @Override

@@ -78,11 +78,11 @@ public class User {
     //private function
     private void getUserInfo() {
         if (role == 2) {
-            this.roleInfo = new Student();
+            this.roleInfo = new Student(userId);
         } else if (role == 1) {
-            this.roleInfo = new Teacher();
+            this.roleInfo = new Teacher(userId);
         } else {
-            this.roleInfo = new Admin();
+            this.roleInfo = new Admin(userId);
         }
         roleInfo.GetUserInfo();
     }

@@ -13,6 +13,10 @@
         <result column="subject_id" property="subject_id"/>
         <result column="subject_name" property="subject_name"/>
     </resultMap>
+    <resultMap id="StudentInfo" type="se.Model.Student">
+        <result column="student_class" property="tclass" />
+        <result column="student_sex" property="sex" />
+    </resultMap>
     <update id="SelfJudge">
         update Student_select_subject
         set grade_selfjudge = #{0}
@@ -49,5 +53,11 @@
         where Subjects.subject_id = Student_select_subject.subject_id
           and Users.user_id = Student_select_subject.user_id
           and Student_select_subject.user_id = #{userId};
+    </select>
+
+    <select id="QuerySelfInfo" resultMap="StudentInfo">
+        select student_sex, student_class
+        from Students
+        where user_id = #{userid};
     </select>
 </mapper>

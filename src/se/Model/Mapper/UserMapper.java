@@ -8,6 +8,9 @@ package se.Model.Mapper;
 
 import se.Model.User;
 
+import java.util.List;
+
 public interface UserMapper {
     User Login(String userID);
+    List<User> QueryAllTeacher();
 }

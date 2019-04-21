@@ -7,6 +7,7 @@
 package se.Model.Mapper;
 
 import se.Model.Grade;
+import se.Model.Student;
 
 import java.util.List;
 
@@ -18,6 +19,6 @@ public interface StudentMapper {
     int CheckOut(String userid);
 
     int SelfJudge(float grade, String userId, int subjectId);
-
+    Student QuerySelfInfo(String userid);
     List<Grade> QueryGrade(String userId);
 }

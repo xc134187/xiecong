@@ -11,12 +11,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import se.Model.Mapper.StudentMapper;
+import se.Model.Mapper.UserMapper;
 import se.Model.User;
 import se.utils.DbUtils;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.util.List;
 
 @Controller
 public class UserController {
@@ -140,6 +142,13 @@ public class UserController {
             }
         }
         return status;
+    }
+
+    @ResponseBody
+    @RequestMapping("/User/AllTeacher")
+    public List<User> AllTeacher(){
+        DbUtils<UserMapper> dbUtils = new DbUtils<>(UserMapper.class);
+        return dbUtils.mapper.QueryAllTeacher();
     }
 
     class CheckinStatus {

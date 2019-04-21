@@ -1,15 +1,16 @@
 <!DOCTYPE html>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <link rel="stylesheet" href="../css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
 
 </head>
 <style>
     body {
-        padding: 00 50px;
+        padding: 00px 50px;
     }
 
     .student-container {
@@ -44,7 +45,7 @@
             <div class="student-container">
                 <div class="left">
                     <div style="width:100%;text-align: center;">
-                        <img src="../images/443625372.jpeg" class="img-thumbnail" style="width:50%;margin-top: 30px;">
+                        <img src="/images/443625372.jpeg" class="img-thumbnail" style="width:50%;margin-top: 30px;">
                     </div>
                     <div style="text-align:center;">
                         <br />
@@ -131,7 +132,7 @@
                                             <td>
                                                 <!-- Button trigger modal -->
                                                 <button type="button" class="btn btn-primary btn-small"
-                                                    data-toggle="modal" th:id="${'update-'+course.id}"
+                                                    data-toggle="modal" th:id=""
                                                     data-target="#courseUpdate" style="font-size:10px;">
                                                     修改课题
                                                 </button>

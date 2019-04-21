@@ -6,6 +6,7 @@
 
 package se.Model.Mapper;
 
+import org.apache.ibatis.annotations.Param;
 import se.Model.Subject;
 
 import java.util.List;
@@ -31,5 +32,8 @@ public interface SubjectMapper {
 
     int UpdateSubjectInfo(Subject subject);
 
-    int StudentSelectSubject(int subjectId, String userId);
+    int StudentSelectSubject(@Param(value="subject_id") int subjectId,
+                             @Param(value="user_id") String userId);
+
+
 }

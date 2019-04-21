@@ -125,7 +125,7 @@
     </insert>
 
     <insert id="StudentSelectSubject" statementType="CALLABLE">
-        call se.Student_select_subject(#{0}, #{1});
+        call se.Student_select_subject(#{subject_id}, #{user_id});
     </insert>
 
     <update id="UpdateSubjectInfo" parameterType="se.Model.Subject">

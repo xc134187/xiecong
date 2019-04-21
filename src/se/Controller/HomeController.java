@@ -9,6 +9,9 @@ package se.Controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import se.Model.User;
+
+import javax.servlet.http.HttpSession;
 
 @Controller
 public class HomeController {
@@ -25,9 +28,14 @@ public class HomeController {
      * @return
      */
     @RequestMapping("/FormMain")
-    public String FormMain(Model model) {
-        model.addAttribute("Title", "FormMain");
-        return "index";
+    public String FormMain(Model model, HttpSession session) {
+        User user = (User)session.getAttribute("user");
+        if (user.getRole() == 1){
+            return "teacher";
+        }else if (user.getRole() == 2){
+            return "student";
+        }
+        return null;
     }
 
     /**

@@ -15,4 +15,10 @@
         from Users
         where user_id = #{userID}
     </select>
+
+    <select id="QueryAllTeacher" resultMap="User">
+        select *
+        from Users
+        where role = 1;
+    </select>
 </mapper>
