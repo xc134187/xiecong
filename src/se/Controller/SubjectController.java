@@ -74,6 +74,12 @@ public class SubjectController {
         }
     }
 
+
+    /**
+     * 更新课程信息
+     * @param subject `Subject` 项目类实体
+     * @param session `HttpSession`
+     */
     @RequestMapping("update_subject")
     public void UpdateSubject(@RequestParam Subject subject, HttpSession session) {
         User user = (User) session.getAttribute("user");
@@ -82,4 +88,28 @@ public class SubjectController {
             (dbUtils.mapper).UpdateSubjectInfo(subject);
         }
     }
+
+    /**
+     * 学生选课接口
+     * @param subjectId `String` 项目id
+     * @param session   `HttpSession`
+     */
+    @RequestMapping("SelectSubject")
+    @ResponseBody
+    public void SelectSubject(@RequestParam int subjectId, HttpSession session){
+        User user = (User)session.getAttribute("user");
+        if(user == null || user.getRole() != 2){
+            return;
+        }else {
+            DbUtils<SubjectMapper> dbUtils = new DbUtils<>(SubjectMapper.class);
+            int max_select = dbUtils.mapper.SelectMaxSelectNum(subjectId);
+            int curr_select = dbUtils.mapper.SelectCurrSelectNum(subjectId);
+            if(curr_select <= max_select){
+                dbUtils.mapper.StudentSelectSubject(subjectId, user.getUserId());
+                dbUtils.session.commit();
+                dbUtils.session.close();
+            }
+        }
+    }
+
 }
