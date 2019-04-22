@@ -31,8 +31,10 @@ public class HomeController {
     public String FormMain(Model model, HttpSession session) {
         User user = (User)session.getAttribute("user");
         if (user.getRole() == 1){
+            model.addAttribute("Title","教师管理页面");
             return "teacher";
         }else if (user.getRole() == 2){
+            model.addAttribute("Title", "学生管理页面");
             return "student";
         }
         return null;
@@ -48,5 +50,11 @@ public class HomeController {
     public String Login(Model model) {
         model.addAttribute("Title", "Login Page");
         return "login";
+    }
+
+    @RequestMapping("/Logout")
+    public String Logout(HttpSession session){
+        session.invalidate();
+        return "redirect:Login";
     }
 }

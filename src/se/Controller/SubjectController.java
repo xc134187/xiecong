@@ -6,6 +6,7 @@
 
 package se.Controller;
 
+import com.sun.deploy.net.HttpResponse;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -16,7 +17,9 @@ import se.Model.Subject;
 import se.Model.User;
 import se.utils.DbUtils;
 
+import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpSession;
+import java.io.IOException;
 import java.util.List;
 
 @RequestMapping("/Subject")
@@ -50,28 +53,44 @@ public class SubjectController {
         return (dbUtils.mapper).SelectAllSub();
     }
 
-    @RequestMapping(value = "pub_subject", method = RequestMethod.GET)
-    public void NewSubject(@RequestParam String subject_name,
+    @RequestMapping(value = "pub_subject", method = RequestMethod.POST)
+    public String NewSubject(@RequestParam String subject_name,
                            @RequestParam String subject_kind,
+                           @RequestParam int max_select_num,
+                           ServletResponse response,
                            HttpSession session) {
-        // 检查当前用户是否为教师
-        User user = (User) session.getAttribute("user");
-        if (user == null)
-            return;
-        if (user.getRole() == 1) {
-            Subject subject = new Subject();
-            subject.setSubjectName(subject_name);
-            subject.setSubjectKind(subject_kind);
-            subject.setTeacherId(user.getUserId());
 
-            DbUtils<SubjectMapper> dbUtils = new DbUtils<>(SubjectMapper.class);
-            (dbUtils.mapper).PubNewSubject(subject);
+        String retLocation = "redirect:/Login";
+        try {
+            // 检查当前用户是否为教师
+            User user = (User) session.getAttribute("user");
+            if (user == null) {
+                response.getWriter().write("<script>alert('你还未登录，请登录后重试')</script>");
+                retLocation = "redirect:/Login";
+            }
+            if (user.getRole() == 1) {
+                Subject subject = new Subject();
+                subject.setSubjectName(subject_name);
+                subject.setSubjectKind(subject_kind);
+                subject.setMaxSelectNum(max_select_num);
+                subject.setTeacherId(user.getUserId());
 
-            dbUtils.session.commit();
-            dbUtils.session.close();
-        } else {
-            return;
+                DbUtils<SubjectMapper> dbUtils = new DbUtils<>(SubjectMapper.class);
+                (dbUtils.mapper).PubNewSubject(subject);
+
+                dbUtils.session.commit();
+                dbUtils.session.close();
+
+                response.getWriter().write("<script>alert('提交成功！')</script>");
+                retLocation = "redirect:/FormMain";
+            } else {
+                response.getWriter().write("<script>alert('只有教师才可以提交课题！')</script>");
+                retLocation = "redirect:/FormMain";
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
         }
+        return retLocation;
     }
 
 

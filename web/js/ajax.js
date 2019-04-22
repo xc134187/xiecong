@@ -34,6 +34,7 @@ function CheckInCallback(context) {
     }
 }
 
+// 查询教师的回调函数
 function QueryTeacherCallback(context) {
     var data = JSON.parse(context);
     for (var i = 0; i < data.length; i++){
@@ -46,11 +47,12 @@ function QueryTeacherCallback(context) {
     }
 }
 
+// 学生端查询教师发布课题回调函数
 function QueryTeacherSubjectCallback(context) {
     var data = JSON.parse(context);
     for(var i = 0; i<data.length;i++ ){
-        var rowNum = document.getElementById("subject-list").length;
-        var row = document.getElementById("subject-list").insertRow();
+        var rowNum = document.getElementById("subject-list").rows.length;
+        var row = document.getElementById("subject-list").insertRow(rowNum);
         row.insertCell(0).innerHTML = data[i].subjectName;
         row.insertCell(1).innerHTML = data[i].subjectKind;
         row.insertCell(2).innerHTML = data[i].teacherName;
@@ -60,6 +62,7 @@ function QueryTeacherSubjectCallback(context) {
     }
 }
 
+// 学生端表格点击事件
 function TableRowClick(obj) {
     return function () {
         document.getElementById("subject-id").value = obj.subjectId;
@@ -68,6 +71,8 @@ function TableRowClick(obj) {
     }
 }
 
+
+// 学生端教师列表点击事件
 function elemClick(obj) {
     return function () {
         var lis = document.getElementById("teacher-list").children;
@@ -76,14 +81,15 @@ function elemClick(obj) {
         }
         var table = document.getElementById("subject-list");
         var len = table.rows.length;
-        for(var i =1; i<len; i++){
-            table.rows[i].remove();
+        for(var i = 2; i<len; i++){
+            table.rows[2].remove();
         }
         obj.setAttribute("class", "list-group-item active");
         ajax(obj.getAttribute("href"), QueryTeacherSubjectCallback, "GET");
     }
 }
 
+// 提交课题选择
 function selectSubject() {
     ajax("/Subject/SelectSubject?subjectId="+document.getElementById("subject-id").value,
         selectSubjectCallback,
@@ -92,4 +98,16 @@ function selectSubject() {
 
 function selectSubjectCallback() {
 
+}
+
+// 依据教师ID查询发布的课题
+function QueryTeacherIdSubjectCallback(context) {
+    var data = JSON.parse(context);
+    for(var i = 0; i<data.length;i++ ){
+        var row = document.getElementById("subject-list").insertRow();
+        row.insertCell(0).innerHTML = data[i].subjectName;
+        row.insertCell(1).innerHTML = data[i].subjectKind;
+        row.insertCell(2).innerHTML = data[i].maxSelectNum;
+        row.insertCell(3).innerHTML = data[i].currSelectNum;
+    }
 }

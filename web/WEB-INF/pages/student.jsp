@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>${Title}</title>
     <link rel="stylesheet" href="/css/bootstrap.min.css">
 </head>
 <style>
@@ -95,9 +95,8 @@
                         <br />
                         <span>班级：${user.roleInfo.tclass}</span>
                         <br />
-                        <span><a href="/Signout">退出登录</a></span>
+                        <span><a href="/Logout">退出登录</a></span>
                     </div>
-
                 </div>
                 <div class="right">
                     <div>
@@ -137,16 +136,16 @@
                                                 </ul>
                                             </div>
                                             <div class="col-xs-10">
-                                                <table id="subject-list" class="table table-bordered table-striped">
-                                                    <thead>
+                                                <table id="subject-list" class="table table-bordered table-striped table-hover">
                                                     <tr>
+                                                        <thead>
                                                         <td>题目名称</td>
                                                         <td>类型</td>
                                                         <td>指导教师</td>
                                                         <td>可选人数</td>
                                                         <td>已选人数</td>
-                                                    </tr>
-                                                    </thead>
+                                                        </thead>
+                                                </tr>
                                                 </table>
                                             </div>
                                         </div>
