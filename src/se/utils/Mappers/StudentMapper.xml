@@ -14,8 +14,8 @@
         <result column="subject_name" property="subject_name"/>
     </resultMap>
     <resultMap id="StudentInfo" type="se.Model.Student">
-        <result column="student_class" property="tclass" />
-        <result column="student_sex" property="sex" />
+        <result column="student_class" property="tclass"/>
+        <result column="student_sex" property="sex"/>
     </resultMap>
     <update id="SelfJudge">
         update Student_select_subject

@@ -9,8 +9,6 @@ package se.Model;
 import se.Model.Mapper.StudentMapper;
 import se.utils.DbUtils;
 
-import java.security.PublicKey;
-
 public class Student implements UserCtl {
     String tclass;
     String sex;
@@ -19,7 +17,8 @@ public class Student implements UserCtl {
     // constructor
     public Student() {
     }
-    public Student(String userId){
+
+    public Student(String userId) {
         this.userId = userId;
         GetUserInfo();
     }

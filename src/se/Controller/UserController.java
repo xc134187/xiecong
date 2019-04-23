@@ -146,7 +146,7 @@ public class UserController {
 
     @ResponseBody
     @RequestMapping("/User/AllTeacher")
-    public List<User> AllTeacher(){
+    public List<User> AllTeacher() {
         DbUtils<UserMapper> dbUtils = new DbUtils<>(UserMapper.class);
         return dbUtils.mapper.QueryAllTeacher();
     }

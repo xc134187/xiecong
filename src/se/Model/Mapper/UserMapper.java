@@ -12,5 +12,6 @@ import java.util.List;
 
 public interface UserMapper {
     User Login(String userID);
+
     List<User> QueryAllTeacher();
 }

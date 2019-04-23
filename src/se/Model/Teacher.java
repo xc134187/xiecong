@@ -9,9 +9,10 @@ package se.Model;
 public class Teacher implements UserCtl {
     String userId;
 
-    public Teacher(){}
+    public Teacher() {
+    }
 
-    public Teacher(String userid){
+    public Teacher(String userid) {
         this.userId = userid;
     }
 

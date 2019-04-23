@@ -12,8 +12,8 @@
         <result column="user_id" property="userId"/>
         <result column="max_select_num" property="maxSelectNum"/>
         <result column="curr_select_num" property="currSelectNum"/>
-        <result column="result_submitted" property="resultSubmitted" />
-        <result column="result_location" property="resultUrl" />
+        <result column="result_submitted" property="resultSubmitted"/>
+        <result column="result_location" property="resultUrl"/>
     </resultMap>
     <select id="SelectByTeacherName" resultMap="Subject">
         select Subjects.subject_id,
@@ -123,12 +123,34 @@
     </select>
 
     <select id="SelectStudentsForTeacher" resultMap="Subject">
-        select Users.user_id, Users.user_name, Subjects.subject_id, subject_kind, subject_name, result_submitted, result_location
-        from Subjects, Teacher_Pub_Subject, Student_select_subject, Users
+        select Users.user_id,
+               Users.user_name,
+               Subjects.subject_id,
+               subject_kind,
+               subject_name,
+               result_submitted,
+               result_location
+        from Subjects,
+             Teacher_Pub_Subject,
+             Student_select_subject,
+             Users
         where Subjects.subject_id = Student_select_subject.subject_id
           and Subjects.subject_id = Teacher_Pub_Subject.subject_id
           and Student_select_subject.user_id = Users.user_id
           and Teacher_Pub_Subject.user_id = #{userId};
+    </select>
+
+    <select id="SelectStudentSubject" resultMap="Subject">
+        select Subjects.subject_id, subject_name, subject_kind, result_submitted, result_location, user_name
+        From Student_select_subject,
+             Subjects,
+             Users,
+             Teacher_Pub_Subject
+        where Subjects.subject_id = Student_select_subject.subject_id
+          and Teacher_Pub_Subject.user_id = Users.user_id
+          and Student_select_subject.subject_id = Teacher_Pub_Subject.subject_id
+          and Student_select_subject.user_id = #{userId};
+
     </select>
 
     <insert id="PubNewSubject" statementType="CALLABLE" parameterType="se.Model.Subject">
@@ -148,4 +170,10 @@
         where subject_id = #{subjectId};
     </update>
 
+    <update id="UploadResult" parameterType="string">
+        update Student_select_subject
+        set result_submitted = true,
+            result_location  = #{result_location}
+        where user_id = #{user_id};
+    </update>
 </mapper>

@@ -6,15 +6,17 @@
 
 package se.Model;
 
-import java.security.PublicKey;
-
 public class Admin implements UserCtl {
 
     String userId;
-    public Admin(){}
-    public Admin(String userId){
+
+    public Admin() {
+    }
+
+    public Admin(String userId) {
         this.userId = userId;
     }
+
     @Override
     public void GetUserInfo() {
 
