@@ -10,10 +10,44 @@ public class Subject {
     private String subjectId;
     private String subjectName;
     private String subjectKind;
-    private String teacherName;
-    private String teacherId;
+    private String userName;
+    private String userId;
+    private boolean resultSubmitted;
+    private String resultUrl;
     private int maxSelectNum;
     private int currSelectNum;
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
+
+    public boolean isResultSubmitted() {
+        return resultSubmitted;
+    }
+
+    public void setResultSubmitted(boolean resultSubmitted) {
+        this.resultSubmitted = resultSubmitted;
+    }
+
+    public String getResultUrl() {
+        return resultUrl;
+    }
+
+    public void setResultUrl(String resultUrl) {
+        this.resultUrl = resultUrl;
+    }
 
     public int getMaxSelectNum() {
         return maxSelectNum;
@@ -29,22 +63,6 @@ public class Subject {
 
     public void setCurrSelectNum(int currSelectNum) {
         this.currSelectNum = currSelectNum;
-    }
-
-    public String getTeacherId() {
-        return teacherId;
-    }
-
-    public void setTeacherId(String teacherId) {
-        this.teacherId = teacherId;
-    }
-
-    public String getTeacherName() {
-        return teacherName;
-    }
-
-    public void setTeacherName(String teacherName) {
-        this.teacherName = teacherName;
     }
 
     public String getSubjectId() {

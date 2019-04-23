@@ -55,7 +55,7 @@ function QueryTeacherSubjectCallback(context) {
         var row = document.getElementById("subject-list").insertRow(rowNum);
         row.insertCell(0).innerHTML = data[i].subjectName;
         row.insertCell(1).innerHTML = data[i].subjectKind;
-        row.insertCell(2).innerHTML = data[i].teacherName;
+        row.insertCell(2).innerHTML = data[i].userName;
         row.insertCell(3).innerHTML = data[i].maxSelectNum;
         row.insertCell(4).innerHTML = data[i].currSelectNum;
         row.onclick = TableRowClick(data[i]);
@@ -67,7 +67,7 @@ function TableRowClick(obj) {
     return function () {
         document.getElementById("subject-id").value = obj.subjectId;
         document.getElementById("subject-name").innerText = '课程名称：'+obj.subjectName;
-        document.getElementById("subject-teacher").innerText = '指导教师：'+obj.teacherName;
+        document.getElementById("subject-teacher").innerText = '指导教师：'+obj.userName;
     }
 }
 
@@ -109,5 +109,23 @@ function QueryTeacherIdSubjectCallback(context) {
         row.insertCell(1).innerHTML = data[i].subjectKind;
         row.insertCell(2).innerHTML = data[i].maxSelectNum;
         row.insertCell(3).innerHTML = data[i].currSelectNum;
+    }
+}
+
+// 教师查询选择其课题的学生列表
+function QueryStudentsForTeacher(context){
+    var data = JSON.parse(context);
+    var table = document.getElementById("student-select-teacher-subject-list");
+    var len = table.rows.length;
+    for(var i = 2; i<len; i++){
+        table.rows[2].remove();
+    }
+    for(var i = 0; i<data.length;i++ ){
+        var row = table.insertRow();
+        row.insertCell(0).innerHTML = data[i].subjectName;
+        row.insertCell(1).innerHTML = data[i].userName;
+        row.insertCell(2).innerHTML = data[i].resultSubmitted?"已提交":"未提交";
+        var url = data[i].resultSubmitted?data[i].resultUrl:'#';
+        row.insertCell(3).innerHTML = "<a href="+url+"> 下载</a>" ;
     }
 }

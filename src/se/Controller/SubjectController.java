@@ -73,7 +73,7 @@ public class SubjectController {
                 subject.setSubjectName(subject_name);
                 subject.setSubjectKind(subject_kind);
                 subject.setMaxSelectNum(max_select_num);
-                subject.setTeacherId(user.getUserId());
+                subject.setUserId(user.getUserId());
 
                 DbUtils<SubjectMapper> dbUtils = new DbUtils<>(SubjectMapper.class);
                 (dbUtils.mapper).PubNewSubject(subject);
@@ -91,6 +91,13 @@ public class SubjectController {
             e.printStackTrace();
         }
         return retLocation;
+    }
+
+    @RequestMapping("SelectStudentsForTeacher")
+    @ResponseBody
+    public List<Subject> SelectStudentsForTeacher(@RequestParam String userId){
+        DbUtils<SubjectMapper> dbUtils = new DbUtils<>(SubjectMapper.class);
+        return (dbUtils.mapper).SelectStudentsForTeacher(userId);
     }
 
 

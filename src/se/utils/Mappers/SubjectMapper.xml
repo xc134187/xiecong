@@ -6,12 +6,14 @@
 <mapper namespace="se.Model.Mapper.SubjectMapper">
     <resultMap id="Subject" type="se.Model.Subject">
         <id column="subject_id" property="subjectId"/>
-        <result column="subject_name" property="subjectKind"/>
-        <result column="subject_kind" property="subjectName"/>
-        <result column="user_name" property="teacherName"/>
-        <result column="user_id" property="teacherId"/>
+        <result column="subject_name" property="subjectName"/>
+        <result column="subject_kind" property="subjectKind"/>
+        <result column="user_name" property="userName"/>
+        <result column="user_id" property="userId"/>
         <result column="max_select_num" property="maxSelectNum"/>
         <result column="curr_select_num" property="currSelectNum"/>
+        <result column="result_submitted" property="resultSubmitted" />
+        <result column="result_location" property="resultUrl" />
     </resultMap>
     <select id="SelectByTeacherName" resultMap="Subject">
         select Subjects.subject_id,
@@ -118,6 +120,15 @@
         select curr_select_num
         from Subjects
         where subject_id = #{subjectId};
+    </select>
+
+    <select id="SelectStudentsForTeacher" resultMap="Subject">
+        select Users.user_id, Users.user_name, Subjects.subject_id, subject_kind, subject_name, result_submitted, result_location
+        from Subjects, Teacher_Pub_Subject, Student_select_subject, Users
+        where Subjects.subject_id = Student_select_subject.subject_id
+          and Subjects.subject_id = Teacher_Pub_Subject.subject_id
+          and Student_select_subject.user_id = Users.user_id
+          and Teacher_Pub_Subject.user_id = #{userId};
     </select>
 
     <insert id="PubNewSubject" statementType="CALLABLE" parameterType="se.Model.Subject">

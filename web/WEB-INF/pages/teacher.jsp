@@ -210,22 +210,15 @@
                                     </div>
 
                                     <!-- Table -->
-                                    <table class="table">
+                                    <table class="table table-bordered table-striped table-hover">
                                         <tr>
-                                            <td style="width:50%;">课题名称</td>
-                                            <td style="width:20%">学号</td>
-                                            <td style="width:10%">姓名</td>
-                                            <td style="width:20%">操作</td>
+                                            <thead>
+                                            <td >课题名称</td>
+                                            <td >学号</td>
+                                            <td >姓名</td>
+                                            <td >操作</td>
+                                            </thead>
                                         </tr>
-                                        <tr>
-                                            <td>基于SSH的二维码线上点餐系统</td>
-                                            <td>201610804024</td>
-                                            <td>Impassive</td>
-                                            <td>
-                                                <a href="">下载</a>
-                                            </td>
-                                        </tr>
-                                        <tr></tr>
                                     </table>
                                 </div>
                             </div>
@@ -238,22 +231,15 @@
                                     </div>
 
                                     <!-- Table -->
-                                    <table class="table">
+                                    <table id="student-select-teacher-subject-list" class="table table-hover table-bordered table-striped">
                                         <tr>
-                                            <td style="width:50%">课题名称</td>
-                                            <td style="width:10%">选题者</td>
-                                            <td style="width:20%">状态</td>
-                                            <td style="width:20%">操作</td>
+                                            <thead>
+                                            <td >课题名称</td>
+                                            <td >选题者</td>
+                                            <td >状态</td>
+                                            <td >操作</td>
+                                            </thead>
                                         </tr>
-                                        <tr>
-                                            <td>基于SSH的二维码线上点餐系统</td>
-                                            <td>Impassive</td>
-                                            <td>未审核</td>
-                                            <td>
-                                                <button class="btn-primary">通过</button>
-                                            </td>
-                                        </tr>
-                                        <tr></tr>
                                     </table>
                                 </div>
                             </div>
@@ -328,6 +314,9 @@
     $('#myTabs a').click(function (e) {
         e.preventDefault();
         $(this).tab('show')
+        if(e.currentTarget.innerText == '查看学生选题'){
+            ajax("/Subject/SelectStudentsForTeacher?userId="+${user.userId},QueryStudentsForTeacher, "GET");
+        }
 
     });
 
@@ -341,8 +330,7 @@
 
         e.className = "active";
 
-    };
-
+    }
     function checkFrom(){
         if($("#input-subject-name").val() != ""
             && $("#input-subject-kind").val() !=""
@@ -354,7 +342,6 @@
             return false;
         }
     }
-
     ajax("/Subject/search_teacher_id?teacher_id="+${user.userId}, QueryTeacherIdSubjectCallback, "GET")
 </script>
 
