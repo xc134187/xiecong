@@ -6,7 +6,7 @@
 
 package se.filter;
 
-import se.Model.User;
+import se.model.User;
 
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;

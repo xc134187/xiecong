@@ -5,15 +5,14 @@
  */
 package se.Controller;
 
-import com.sun.org.apache.xpath.internal.operations.Bool;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import se.Model.Mapper.StudentMapper;
-import se.Model.Mapper.UserMapper;
-import se.Model.User;
+import se.model.Mapper.StudentMapper;
+import se.model.Mapper.UserMapper;
+import se.model.User;
 import se.utils.DbUtils;
 
 import javax.servlet.http.HttpServletResponse;
@@ -148,16 +147,16 @@ public class UserController {
 
     @ResponseBody
     @RequestMapping("/User/isTodayCheckedIn")
-    public HashMap<String, Boolean> IsTodayCheckedIn(HttpSession session){
+    public HashMap<String, Boolean> IsTodayCheckedIn(HttpSession session) {
         User user = (User) session.getAttribute("user");
         if (user.getRole() == 2) {
             DbUtils<StudentMapper> dbUtils = new DbUtils<>(StudentMapper.class);
             boolean isTodayCheckedIn = dbUtils.mapper.IsTodayCheckedIn(user.getUserId());
-            HashMap<String,Boolean> ret = new HashMap<>();
-            ret.put( "CheckedIn" ,(Boolean)isTodayCheckedIn);
-            return  ret;
+            HashMap<String, Boolean> ret = new HashMap<>();
+            ret.put("CheckedIn", (Boolean) isTodayCheckedIn);
+            return ret;
         }
-        return  null;
+        return null;
     }
 
 

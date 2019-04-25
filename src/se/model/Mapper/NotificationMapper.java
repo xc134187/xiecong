@@ -4,9 +4,9 @@
  * @date: 2019/4/14
  */
 
-package se.Model.Mapper;
+package se.model.Mapper;
 
-import se.Model.Notification;
+import se.model.Notification;
 
 import java.util.List;
 

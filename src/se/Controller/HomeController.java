@@ -16,7 +16,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import se.Model.User;
+import se.model.User;
 
 import javax.servlet.http.HttpSession;
 import java.io.File;
@@ -44,8 +44,8 @@ public class HomeController {
         } else if (user.getRole() == 2) {
             model.addAttribute("Title", "学生管理页面");
             return "student";
-        } else if (user.getRole() == 3){
-            model.addAttribute("Title","系统管理页面");
+        } else if (user.getRole() == 3) {
+            model.addAttribute("Title", "系统管理页面");
             return "admin";
         }
         return null;

@@ -4,10 +4,10 @@
  * @date: 2019/4/19
  */
 
-package se.Model.Mapper;
+package se.model.Mapper;
 
-import se.Model.Grade;
-import se.Model.Student;
+import se.model.Grade;
+import se.model.Student;
 
 import java.util.List;
 

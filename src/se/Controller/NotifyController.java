@@ -12,9 +12,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
-import se.Model.Mapper.NotificationMapper;
-import se.Model.Notification;
-import se.Model.User;
+import se.model.Mapper.NotificationMapper;
+import se.model.Notification;
+import se.model.User;
 import se.utils.DbUtils;
 
 import javax.servlet.http.HttpServletRequest;
@@ -64,11 +64,11 @@ public class NotifyController {
      */
     @RequestMapping(value = "/Notify/New", method = RequestMethod.POST)
     public void New(@RequestParam String title,
-                      @RequestParam String text,
-                      @RequestParam MultipartFile file,
-                      HttpServletRequest request,
-                      HttpServletResponse response,
-                      HttpSession session) throws IOException {
+                    @RequestParam String text,
+                    @RequestParam MultipartFile file,
+                    HttpServletRequest request,
+                    HttpServletResponse response,
+                    HttpSession session) throws IOException {
         response.setHeader("Content-type", "text/html;charset=UTF-8");
         //todo: check the current user is admin
         User user = (User) session.getAttribute("user");
@@ -97,7 +97,7 @@ public class NotifyController {
             Notification notification = new Notification();
             notification.setTime(time);
             notification.setTitle(title);
-            String context = (url == null)?text: text + "<br />附件<a href='"+url+"'></a>";
+            String context = (url == null) ? text : text + "<br />附件<a href='" + url + "'></a>";
             notification.setContext(context);
 
             DbUtils<NotificationMapper> dbUtils = new DbUtils<>(NotificationMapper.class);

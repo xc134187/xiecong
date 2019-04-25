@@ -4,9 +4,9 @@
  * @date: 2019/4/12
  */
 
-package se.Model;
+package se.model;
 
-import se.Model.Mapper.StudentMapper;
+import se.model.Mapper.StudentMapper;
 import se.utils.DbUtils;
 
 public class Student implements UserCtl {

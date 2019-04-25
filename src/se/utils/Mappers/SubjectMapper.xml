@@ -3,8 +3,8 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="se.Model.Mapper.SubjectMapper">
-    <resultMap id="Subject" type="se.Model.Subject">
+<mapper namespace="se.model.Mapper.SubjectMapper">
+    <resultMap id="Subject" type="se.model.Subject">
         <id column="subject_id" property="subjectId"/>
         <result column="subject_name" property="subjectName"/>
         <result column="subject_kind" property="subjectKind"/>
@@ -153,7 +153,7 @@
 
     </select>
 
-    <insert id="PubNewSubject" statementType="CALLABLE" parameterType="se.Model.Subject">
+    <insert id="PubNewSubject" statementType="CALLABLE" parameterType="se.model.Subject">
         call insert_subject(#{subjectName}, #{subjectKind}, #{teacherId});
     </insert>
 
@@ -161,7 +161,7 @@
         call se.Student_select_subject(#{subject_id}, #{user_id});
     </insert>
 
-    <update id="UpdateSubjectInfo" parameterType="se.Model.Subject">
+    <update id="UpdateSubjectInfo" parameterType="se.model.Subject">
         update Subjects
         set subject_name    = #{subjectName},
             subject_kind    = #{subjectKind},

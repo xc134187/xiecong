@@ -3,8 +3,8 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="se.Model.Mapper.StudentMapper">
-    <resultMap id="Grade" type="se.Model.Grade">
+<mapper namespace="se.model.Mapper.StudentMapper">
+    <resultMap id="Grade" type="se.model.Grade">
         <result column="grade_normal" property="grade_normal"/>
         <result column="grade_final" property="grade_final"/>
         <result column="grade_selfjudge" property="grade_selfjudge"/>
@@ -13,7 +13,7 @@
         <result column="subject_id" property="subject_id"/>
         <result column="subject_name" property="subject_name"/>
     </resultMap>
-    <resultMap id="StudentInfo" type="se.Model.Student">
+    <resultMap id="StudentInfo" type="se.model.Student">
         <result column="student_class" property="tclass"/>
         <result column="student_sex" property="sex"/>
     </resultMap>

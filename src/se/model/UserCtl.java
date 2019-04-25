@@ -4,7 +4,7 @@
  * @date: 2019/4/12
  */
 
-package se.Model;
+package se.model;
 
 /**
  * UserCtl interface: method for user role

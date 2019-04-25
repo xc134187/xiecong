@@ -4,7 +4,7 @@
  * @date: 2019/4/14
  */
 
-package se.Model;
+package se.model;
 
 public class Subject {
     private String subjectId;

@@ -4,9 +4,9 @@
  * @date: 2019/4/13
  */
 
-package se.Model.Mapper;
+package se.model.Mapper;
 
-import se.Model.User;
+import se.model.User;
 
 import java.util.List;
 

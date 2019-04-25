@@ -4,7 +4,7 @@
  * @date: 2019/4/19
  */
 
-package se.Model;
+package se.model;
 
 public class Grade {
     float grade_normal, grade_final, grade_selfjudge;

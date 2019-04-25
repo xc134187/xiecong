@@ -4,10 +4,10 @@
  * @date: 2019/4/14
  */
 
-package se.Model.Mapper;
+package se.model.Mapper;
 
 import org.apache.ibatis.annotations.Param;
-import se.Model.Subject;
+import se.model.Subject;
 
 import java.util.List;
 
