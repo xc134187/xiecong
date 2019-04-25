@@ -84,7 +84,7 @@
                     <br/>
                     <span>
                             <button id="btn-check-in"
-                                    class="btn btn-block"
+                                    class="btn btn-primary"
                                     onclick="ajax('/User/Checkin', CheckInCallback, 'GET')">签到</button>
                         </span>
                     <br/>
@@ -267,6 +267,8 @@
 
     };
     ajax('/User/AllTeacher', QueryTeacherCallback, 'GET');
+
+    checkUserCheckin();
 </script>
 
 </html>

@@ -1,5 +1,5 @@
 function ajax(url, callback, method) {
-    xhr = new XMLHttpRequest();
+    var xhr = new XMLHttpRequest();
     xhr.open(method, url, true);
     xhr.send();
     xhr.onreadystatechange = function (ev) {
@@ -21,16 +21,45 @@ function NotifyCallback(context) {
     }
 }
 
+// 签到回调函数
 function CheckInCallback(context) {
     var data = JSON.parse(context);
-    if (data.Checkin == 'checkin' && data.result == true) {
+    if (data.checkin == 'checkin' && data.result == true) {
         document.getElementById("btn-check-in").innerHTML = "签退";
-        document.getElementById("btn-check-in").onclick = ajax("/User/Checkout", this, "GET");
-        alert("签到成功");
-    } else if (data.Checkin == "checkout" && data.result == true) {
+        document.getElementById("btn-check-in").onclick = function (ev) { ajax("/User/Checkout", CheckoutCallback, "GET"); };
         alert("签到成功");
     } else {
-        alert("签到失败" + data.message);
+        alert(data.message);
+    }
+}
+
+// 签退回调函数
+function CheckoutCallback(context) {
+
+    var data = JSON.parse(context);
+    if (data.checkin == 'checkout' && data.result == true) {
+        document.getElementById("btn-check-in").innerHTML = "已完成签到";
+        document.getElementById("btn-check-in").disabled=true;
+        alert("签退成功");
+    } else {
+        alert("签退失败" + data.message);
+    }
+}
+
+function checkUserCheckin() {
+    var xhr = new XMLHttpRequest();
+    xhr.open("GET", '/User/isTodayCheckedIn', true);
+    xhr.send();
+    xhr.onreadystatechange = function (ev) {
+        if (xhr.readyState == 4 && xhr.status == 200) {
+            var data = JSON.parse(xhr.responseText);
+            if (data == null)
+                return;
+            if (data.CheckedIn== true) {
+                document.getElementById("btn-check-in").innerHTML = "签退";
+                document.getElementById("btn-check-in").onclick = function (ev) { ajax("/User/Checkout", CheckoutCallback, "GET"); };
+            }
+        }
     }
 }
 

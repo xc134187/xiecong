@@ -16,6 +16,7 @@
     <filter-mapping>
         <filter-name>LoginFilter</filter-name>
         <url-pattern>/FormMain</url-pattern>
+        <url-pattern>/Subject/*</url-pattern>
     </filter-mapping>
 
     <filter>

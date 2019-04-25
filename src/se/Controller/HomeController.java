@@ -44,6 +44,9 @@ public class HomeController {
         } else if (user.getRole() == 2) {
             model.addAttribute("Title", "学生管理页面");
             return "student";
+        } else if (user.getRole() == 3){
+            model.addAttribute("Title","系统管理页面");
+            return "admin";
         }
         return null;
     }
@@ -54,15 +57,9 @@ public class HomeController {
             String storeDir = request.getSession().getServletContext().getRealPath("/files");
             File file = new File(storeDir, filename);
             HttpHeaders headers = new HttpHeaders();
-
             String downloadFileName = new String(filename.getBytes("UTF-8"), "iso-8859-1");//设置编码
-
             headers.setContentDispositionFormData("attachment", downloadFileName);
-
             headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
-
-            //MediaType:互联网媒介类型  contentType：具体请求中的媒体类型信息
-
             return new ResponseEntity<byte[]>(FileUtils.readFileToByteArray(file), headers, HttpStatus.CREATED);
         } catch (Exception e) {
             e.printStackTrace();

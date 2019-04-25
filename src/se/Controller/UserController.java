@@ -5,6 +5,7 @@
  */
 package se.Controller;
 
+import com.sun.org.apache.xpath.internal.operations.Bool;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -18,6 +19,7 @@ import se.utils.DbUtils;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
 
 @Controller
@@ -89,11 +91,11 @@ public class UserController {
             status.setUserid(user.getUserId());
             status.setMessage("签到只允许学生进行");
             status.setResult(false);
-            status.setCheckin("Checkin");
+            status.setCheckin("checkin");
         } else if (user.getRole() == 2) {
             DbUtils<StudentMapper> dbUtils = new DbUtils<>(StudentMapper.class);
-            boolean isTodeyCheckedIn = dbUtils.mapper.IsTodayCheckedIn(user.getUserId());
-            if (!isTodeyCheckedIn) {
+            boolean isTodayCheckedIn = dbUtils.mapper.IsTodayCheckedIn(user.getUserId());
+            if (!isTodayCheckedIn) {
                 dbUtils.mapper.CheckIn(user.getUserId());
                 dbUtils.session.commit();
                 status.setUserid(user.getUserId());
@@ -123,7 +125,7 @@ public class UserController {
             status.setUserid(user.getUserId());
             status.setMessage("签到只允许学生进行");
             status.setResult(false);
-            status.setCheckin("Checkout");
+            status.setCheckin("checkout");
         } else if (user.getRole() == 2) {
             DbUtils<StudentMapper> dbUtils = new DbUtils<>(StudentMapper.class);
             boolean isTodeyCheckedIn = dbUtils.mapper.IsTodayCheckedIn(user.getUserId());
@@ -133,16 +135,31 @@ public class UserController {
                 status.setUserid(user.getUserId());
                 status.setResult(true);
                 status.setMessage("签退成功");
-                status.setCheckin("Checkout");
+                status.setCheckin("checkout");
             } else {
                 status.setUserid(user.getUserId());
                 status.setResult(false);
                 status.setMessage("签退失败,今日未签到！");
-                status.setCheckin("CheckOut");
+                status.setCheckin("checkOut");
             }
         }
         return status;
     }
+
+    @ResponseBody
+    @RequestMapping("/User/isTodayCheckedIn")
+    public HashMap<String, Boolean> IsTodayCheckedIn(HttpSession session){
+        User user = (User) session.getAttribute("user");
+        if (user.getRole() == 2) {
+            DbUtils<StudentMapper> dbUtils = new DbUtils<>(StudentMapper.class);
+            boolean isTodayCheckedIn = dbUtils.mapper.IsTodayCheckedIn(user.getUserId());
+            HashMap<String,Boolean> ret = new HashMap<>();
+            ret.put( "CheckedIn" ,(Boolean)isTodayCheckedIn);
+            return  ret;
+        }
+        return  null;
+    }
+
 
     @ResponseBody
     @RequestMapping("/User/AllTeacher")
