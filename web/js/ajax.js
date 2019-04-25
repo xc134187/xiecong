@@ -125,8 +125,10 @@ function selectSubject() {
         "GET")
 }
 
-function selectSubjectCallback() {
-
+// 选课回调函数
+function selectSubjectCallback(context) {
+    var data = JSON.parse(context);
+    alert(data.message);
 }
 
 // 依据教师ID查询发布的课题

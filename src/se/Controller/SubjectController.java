@@ -138,7 +138,7 @@ public class SubjectController {
         if (now.after(StartupListener.config.getSelectSubjectStartTime()) && now.before(StartupListener.config.getSelectSubjectEndTime())) {
             User user = (User) session.getAttribute("user");
             if (user == null || user.getRole() != 2) {
-                response.getWriter().write("<script>alert('请登录学生账号来选课！');window.location.href='/FormMain'</script>");
+                response.getWriter().write("{\"result\":false,\"message\":\"请登录学生账号来选题！\"}");
             } else {
                 DbUtils<SubjectMapper> dbUtils = new DbUtils<>(SubjectMapper.class);
                 int max_select = dbUtils.mapper.SelectMaxSelectNum(subjectId);
@@ -147,11 +147,12 @@ public class SubjectController {
                     dbUtils.mapper.StudentSelectSubject(subjectId, user.getUserId());
                     dbUtils.session.commit();
                     dbUtils.session.close();
-                    response.getWriter().write("<script>alert('选课成功！');window.location.href='/FormMain'</script>");
+                    response.getWriter().write("{\"result\":true,\"message\":\"选题成功\"}");
                 }
+                response.getWriter().write("{\"result\":false,\"message\":\"选题人数已满\"}");
             }
         } else {
-            response.getWriter().write("<script>alert('现在还不是选课的时间！');window.location.href='/FormMain'</script>");
+            response.getWriter().write("{\"result\":false,\"message\":\"不是选题时间\"}");
         }
     }
 
