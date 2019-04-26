@@ -117,108 +117,119 @@
                                 </div>
                                 <div class="panel-body">
                                     <form action="/Admin/UpdateControl" method="post">
-                                    <div class="form-horizontal">
-                                        <span>课题发布时间</span><br />
-                                        <div>
-                                            <div class="form-group">
-                                                <label class="col-sm-2 control-label" for="pubSubjectStartTime">开始时间</label>
-                                                <div class="col-sm-10">
-                                                <input type="date" class="form-control" name="pubSubjectStartTime"
-                                                       id="pubSubjectStartTime">
+                                        <div class="form-horizontal">
+                                            <span>课题发布时间</span><br/>
+                                            <div>
+                                                <div class="form-group">
+                                                    <label class="col-sm-2 control-label"
+                                                           for="pubSubjectStartTime">开始时间</label>
+                                                    <div class="col-sm-10">
+                                                        <input type="date" class="form-control"
+                                                               name="pubSubjectStartTime"
+                                                               id="pubSubjectStartTime">
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <label class="col-sm-2 control-label"  for="pubSubjectEndTime">结束时间</label>
-                                                <div class="col-sm-10">
-                                                <input type="date" class="form-control" name="pubSubjectEndTime"
-                                                       id="pubSubjectEndTime" >
-                                                </div>
-                                                </div>
-                                        </div>
-                                    </div>
-                                    <div class="form-horizontal">
-                                        <span>学生选题时间</span><br />
-                                        <div>
-                                            <div class="form-group">
-                                                <label class="col-sm-2 control-label"  for="selectSubjectStartTime">开始时间</label>
-                                                <div class="col-sm-10">
-                                                <input type="date" class="form-control" name="selectSubjectStartTime"
-                                                       id="selectSubjectStartTime">
-                                                </div>
-                                                </div>
-                                            <div class="form-group">
-                                                <label class="col-sm-2 control-label"  for="selectSubjectEndTime">结束时间</label>
-                                                <div class="col-sm-10">
-                                                <input type="date" class="form-control" name="selectSubjectEndTime"
-                                                       id="selectSubjectEndTime" >
+                                                <div class="form-group">
+                                                    <label class="col-sm-2 control-label"
+                                                           for="pubSubjectEndTime">结束时间</label>
+                                                    <div class="col-sm-10">
+                                                        <input type="date" class="form-control" name="pubSubjectEndTime"
+                                                               id="pubSubjectEndTime">
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="form-horizontal">
-                                        <span>成果提交时间</span> <br />
-                                        <div>
-                                            <div class="form-group">
-                                                <label class="col-sm-2 control-label"  for="uploadResultStartTime">开始时间</label>
-                                                <div class="col-sm-10">
-                                                <input type="date" class="form-control" name="uploadResultStartTime"
-                                                       id="uploadResultStartTime">
+                                        <div class="form-horizontal">
+                                            <span>学生选题时间</span><br/>
+                                            <div>
+                                                <div class="form-group">
+                                                    <label class="col-sm-2 control-label" for="selectSubjectStartTime">开始时间</label>
+                                                    <div class="col-sm-10">
+                                                        <input type="date" class="form-control"
+                                                               name="selectSubjectStartTime"
+                                                               id="selectSubjectStartTime">
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <label class="col-sm-2 control-label"  for="uploadResultEndTime">结束时间</label>
-                                                <div class="col-sm-10">
-                                                <input type="date" class="form-control" name="uploadResultEndTime"
-                                                       id="uploadResultEndTime" >
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="form-horizontal">
-                                        <span>成绩发布时间</span> <br />
-                                        <div>
-                                            <div class="form-group">
-                                                <label class="col-sm-2 control-label"  for="pubGradeStartTime">开始时间</label>
-                                                <div class="col-sm-10">
-                                                <input type="date" class="form-control" name="pubGradeStartTime"
-                                                       id="pubGradeStartTime">
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <label class="col-sm-2 control-label"  for="pubGradeEndTime">结束时间</label>
-                                                <div class="col-sm-10">
-                                                <input type="date" class="form-control" name="pubGradeEndTime"
-                                                       id="pubGradeEndTime" >
+                                                <div class="form-group">
+                                                    <label class="col-sm-2 control-label" for="selectSubjectEndTime">结束时间</label>
+                                                    <div class="col-sm-10">
+                                                        <input type="date" class="form-control"
+                                                               name="selectSubjectEndTime"
+                                                               id="selectSubjectEndTime">
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="form-horizontal">
-                                        <span>签到时间管理</span><br />
-                                    <div class="form-group">
-                                        <label class="col-sm-2 control-label" for="checkInTime">签到时间</label>
-                                        <div class="col-sm-10">
-                                            <input type="time" class="form-control" name="checkInTime"
-                                                   id="checkInTime">
+                                        <div class="form-horizontal">
+                                            <span>成果提交时间</span> <br/>
+                                            <div>
+                                                <div class="form-group">
+                                                    <label class="col-sm-2 control-label" for="uploadResultStartTime">开始时间</label>
+                                                    <div class="col-sm-10">
+                                                        <input type="date" class="form-control"
+                                                               name="uploadResultStartTime"
+                                                               id="uploadResultStartTime">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-sm-2 control-label"
+                                                           for="uploadResultEndTime">结束时间</label>
+                                                    <div class="col-sm-10">
+                                                        <input type="date" class="form-control"
+                                                               name="uploadResultEndTime"
+                                                               id="uploadResultEndTime">
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-sm-2 control-label"  for="checkOutTime">签退时间</label>
-                                        <div class="col-sm-10">
-                                            <input type="time" class="form-control" name="checkOutTime"
-                                                   id="checkOutTime" >
+                                        <div class="form-horizontal">
+                                            <span>成绩发布时间</span> <br/>
+                                            <div>
+                                                <div class="form-group">
+                                                    <label class="col-sm-2 control-label"
+                                                           for="pubGradeStartTime">开始时间</label>
+                                                    <div class="col-sm-10">
+                                                        <input type="date" class="form-control" name="pubGradeStartTime"
+                                                               id="pubGradeStartTime">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-sm-2 control-label"
+                                                           for="pubGradeEndTime">结束时间</label>
+                                                    <div class="col-sm-10">
+                                                        <input type="date" class="form-control" name="pubGradeEndTime"
+                                                               id="pubGradeEndTime">
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-sm-2 control-label"  for="checkInResetTime">重置时间</label>
-                                        <div class="col-sm-10">
-                                            <input type="time" class="form-control" name="checkInResetTime"
-                                                   id="checkInResetTime" >
+                                        <div class="form-horizontal">
+                                            <span>签到时间管理</span><br/>
+                                            <div class="form-group">
+                                                <label class="col-sm-2 control-label" for="checkInTime">签到时间</label>
+                                                <div class="col-sm-10">
+                                                    <input type="time" class="form-control" name="checkInTime"
+                                                           id="checkInTime">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-2 control-label" for="checkOutTime">签退时间</label>
+                                                <div class="col-sm-10">
+                                                    <input type="time" class="form-control" name="checkOutTime"
+                                                           id="checkOutTime">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-2 control-label"
+                                                       for="checkInResetTime">重置时间</label>
+                                                <div class="col-sm-10">
+                                                    <input type="time" class="form-control" name="checkInResetTime"
+                                                           id="checkInResetTime">
+                                                </div>
+                                            </div>
                                         </div>
-                                    </div>
-                                    </div>
-                                    <input type="submit" class="col-sm-offset-2 btn btn-primary" value="提交">
-                                </form>
+                                        <input type="submit" class="col-sm-offset-2 btn btn-primary" value="提交">
+                                    </form>
                                 </div>
                             </div>
                         </div>
@@ -229,10 +240,10 @@
                                 <div class="panel-heading">签到时间管理</div>
                                 <div class="panel-body">
                                     <div class="form-horizontal">
-                                        <span>签到时间管理</span><br />
+                                        <span>签到时间管理</span><br/>
                                         <div>
 
-                                            <button class="col-sm-offset-2 btn btn-primary" >提交</button>
+                                            <button class="col-sm-offset-2 btn btn-primary">提交</button>
                                         </div>
                                     </div>
                                 </div>
@@ -244,26 +255,26 @@
                                 <!-- Default panel contents -->
                                 <div class="panel-heading">通知发布</div>
                                 <div class="panel-body">
-                                    <form action="/Notify/New"  enctype="multipart/form-data"  method="post" >
-                                    <div class="form-group">
-                                        <label class="control-label"  for="Title">标题</label>
-                                        <div>
-                                            <input type="text" class="form-control" name="title"
-                                                   id="Title" >
+                                    <form action="/Notify/New" enctype="multipart/form-data" method="post">
+                                        <div class="form-group">
+                                            <label class="control-label" for="Title">标题</label>
+                                            <div>
+                                                <input type="text" class="form-control" name="title"
+                                                       id="Title">
+                                            </div>
                                         </div>
-                                    </div>
-                                    <label class="control-label"  for="Context">正文</label>
-                                    <div>
+                                        <label class="control-label" for="Context">正文</label>
+                                        <div>
                                         <textarea name="text" class="form-control" rows="5"
-                                               id="Context" ></textarea>
-                                    </div>
-                                    <label class="control-label"  for="file">附件</label>
-                                    <div>
-                                        <input name="file" type="file"
-                                               id="file" >
-                                    </div>
-                                        <br />
-                                        <input type="submit" class="btn-primary btn" />
+                                                  id="Context"></textarea>
+                                        </div>
+                                        <label class="control-label" for="file">附件</label>
+                                        <div>
+                                            <input name="file" type="file"
+                                                   id="file">
+                                        </div>
+                                        <br/>
+                                        <input type="submit" class="btn-primary btn"/>
                                     </form>
                                 </div>
                             </div>

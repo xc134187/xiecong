@@ -26,7 +26,9 @@ function CheckInCallback(context) {
     var data = JSON.parse(context);
     if (data.checkin == 'checkin' && data.result == true) {
         document.getElementById("btn-check-in").innerHTML = "签退";
-        document.getElementById("btn-check-in").onclick = function (ev) { ajax("/User/Checkout", CheckoutCallback, "GET"); };
+        document.getElementById("btn-check-in").onclick = function (ev) {
+            ajax("/User/Checkout", CheckoutCallback, "GET");
+        };
         alert("签到成功");
     } else {
         alert(data.message);
@@ -39,7 +41,7 @@ function CheckoutCallback(context) {
     var data = JSON.parse(context);
     if (data.checkin == 'checkout' && data.result == true) {
         document.getElementById("btn-check-in").innerHTML = "已完成签到";
-        document.getElementById("btn-check-in").disabled=true;
+        document.getElementById("btn-check-in").disabled = true;
         alert("签退成功");
     } else {
         alert("签退失败" + data.message);
@@ -55,9 +57,11 @@ function checkUserCheckin() {
             var data = JSON.parse(xhr.responseText);
             if (data == null)
                 return;
-            if (data.CheckedIn== true) {
+            if (data.CheckedIn == true) {
                 document.getElementById("btn-check-in").innerHTML = "签退";
-                document.getElementById("btn-check-in").onclick = function (ev) { ajax("/User/Checkout", CheckoutCallback, "GET"); };
+                document.getElementById("btn-check-in").onclick = function (ev) {
+                    ajax("/User/Checkout", CheckoutCallback, "GET");
+                };
             }
         }
     }
@@ -175,9 +179,6 @@ function QueryStudentsForTeacher(context) {
     }
 }
 
-
-
-
 function QueryControlTimeCallback(context) {
     var data = JSON.parse(context);
     $("#pubSubjectStartTime").val(convertDate(new Date(data.pubSubjectStartTime)));
@@ -188,22 +189,29 @@ function QueryControlTimeCallback(context) {
     $("#uploadResultEndTime").val(convertDate(new Date(data.uploadResultEndTime)));
     $("#pubGradeStartTime").val(convertDate(new Date(data.pubGradeStartTime)));
     $("#pubGradeEndTime").val(convertDate(new Date(data.pubGradeEndTime)));
-    $("#checkInTime").val(convertTime( new Date(data.checkInTime)));
+    $("#checkInTime").val(convertTime(new Date(data.checkInTime)));
     $("#checkOutTime").val(convertTime(new Date(data.checkOutTime)));
     $("#checkInResetTime").val(convertTime(new Date(data.checkInResetTime)));
 }
 
 function convertDate(date) {
     var str = "";
-    str += date.getFullYear()+'-';
-    str += ((date.getMonth() + 1) < 10 ? '0'+(date.getMonth() + 1):date.getMonth() + 1)+'-';
-    str += (date.getDate() < 10 ? '0' + date.getDate(): date.getDate());
+    str += date.getFullYear() + '-';
+    str += ((date.getMonth() + 1) < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1) + '-';
+    str += (date.getDate() < 10 ? '0' + date.getDate() : date.getDate());
     return str
 }
 
 function convertTime(time) {
     var str = "";
-    str += (time.getHours() < 10 ? '0'+time.getHours():time.getHours())+':';
-    str += (time.getMinutes() < 10 ) ? '0' + time.getMinutes(): time.getMinutes();
+    str += (time.getHours() < 10 ? '0' + time.getHours() : time.getHours()) + ':';
+    str += (time.getMinutes() < 10) ? '0' + time.getMinutes() : time.getMinutes();
     return str;
+}
+
+function StudentQueryControlTimeCallback(context) {
+    var data = JSON.parse(context);
+    // 设置签到btn是否禁用
+    var now = new Date();
+    document.getElementById("btn-check-in").disable = (!(now.getHours() == new Date(data.CheckInTime).getHours()));
 }

@@ -1,11 +1,11 @@
 package se.listener;
 
-import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Service;
+import se.model.Mapper.WebConfigMapper;
 import se.model.WebsiteConfig;
+import se.utils.DbUtils;
 
 @Service
 public class StartupListener implements ApplicationListener<ContextRefreshedEvent> {
@@ -13,7 +13,9 @@ public class StartupListener implements ApplicationListener<ContextRefreshedEven
 
     @Override
     public void onApplicationEvent(ContextRefreshedEvent contextRefreshedEvent) {
-        ApplicationContext context = new ClassPathXmlApplicationContext("website-config.xml");
-        config = (WebsiteConfig) context.getBean("WebsiteConfig");
+//        ApplicationContext context = new ClassPathXmlApplicationContext("website-config.xml");
+//        config = (WebsiteConfig) context.getBean("WebsiteConfig");
+        DbUtils<WebConfigMapper> dbUtils = new DbUtils<>(WebConfigMapper.class);
+        config = dbUtils.mapper.QueryConfig();
     }
 }

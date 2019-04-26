@@ -265,9 +265,10 @@
 
         e.className = "active";
 
-    };
-    ajax('/User/AllTeacher', QueryTeacherCallback, 'GET');
+    }
 
+    ajax('/User/AllTeacher', QueryTeacherCallback, 'GET');
+    ajax("/Admin/controlTime", StudentQueryControlTimeCallback, "GET")
     checkUserCheckin();
 </script>
 

@@ -34,8 +34,8 @@ public class AdminController {
                                   @RequestParam String checkOutTime,
                                   @RequestParam String checkInResetTime,
                                   HttpSession session) throws ParseException {
-        User user = (User)session.getAttribute("user");
-        if(user != null && user.getRole() == 3){
+        User user = (User) session.getAttribute("user");
+        if (user != null && user.getRole() == 3) {
             StartupListener.config.setPubSubjectStartTime(pubSubjectStartTime);
             StartupListener.config.setPubSubjectEndTime(pubSubjectEndTime);
             StartupListener.config.setSelectSubjectStartTime(selectSubjectStartTime);
@@ -47,14 +47,13 @@ public class AdminController {
             StartupListener.config.setCheckInTime(checkInTime);
             StartupListener.config.setCheckOutTime(checkOutTime);
             StartupListener.config.setCheckInResetTime(checkInResetTime);
-
-            StartupListener.config.WriteConfig();
+            StartupListener.config.UpdateConfig();
         }
     }
 
     @ResponseBody
     @RequestMapping("controlTime")
-    public WebsiteConfig ControlTime(){
+    public WebsiteConfig ControlTime() {
         return StartupListener.config;
     }
 }

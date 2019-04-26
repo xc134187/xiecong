@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="se.model.Mapper.WebConfigMapper">
+    <resultMap id="Webconfig" type="se.model.WebsiteConfig">
+        <result column="pubSubjectStartTime" property="pubSubjectStartTime"/>
+        <result column="pubSubjectEndTime" property="pubSubjectEndTime"/>
+        <result column="selectSubjectStartTime" property="selectSubjectStartTime"/>
+        <result column="selectSubjectEndTime" property="selectSubjectEndTime"/>
+        <result column="uploadResultStartTime" property="uploadResultStartTime"/>
+        <result column="uploadResultEndTime" property="uploadResultEndTime"/>
+        <result column="pubGradeStartTime" property="pubGradeStartTime"/>
+        <result column="pubGradeEndTime" property="pubGradeEndTime"/>
+        <result column="checkInTime" property="checkInTime"/>
+        <result column="checkOutTime" property="checkOutTime"/>
+        <result column="checkInResetTime" property="checkInResetTime"/>
+    </resultMap>
+    <select id="QueryConfig" parameterType="string" resultMap="Webconfig">
+        select *
+        from config
+        limit 1;
+    </select>
+    <update id="UpdateConfig">
+        update config
+        set pubSubjectStartTime    = #{pubSubjectStartTime},
+            pubSubjectEndTime      = #{pubSubjectEndTime},
+            selectSubjectStartTime = #{selectSubjectStartTime},
+            selectSubjectEndTime   = #{selectSubjectEndTime},
+            uploadResultStartTime  = #{uploadResultStartTime},
+            uploadResultEndTime    = #{uploadResultEndTime},
+            pubGradeStartTime      = #{pubGradeStartTime},
+            pubGradeEndTime        = #{pubGradeEndTime},
+            checkInTime            = #{checkInTime},
+            checkOutTime           = #{checkOutTime},
+            checkInResetTime       = #{checkInResetTime}
+        where id = 1;
+    </update>
+</mapper>

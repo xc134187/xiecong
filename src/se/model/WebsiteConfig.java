@@ -7,14 +7,12 @@
 package se.model;
 
 import javafx.util.converter.DateStringConverter;
+import se.model.Mapper.WebConfigMapper;
+import se.utils.DbUtils;
 
-import java.io.FileInputStream;
-import java.io.FileWriter;
-import java.io.Writer;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.Properties;
 
 public class WebsiteConfig {
     private Date pubSubjectStartTime;
@@ -30,33 +28,63 @@ public class WebsiteConfig {
     private Date checkOutTime;
     private Date checkInResetTime;
 
-    public void WriteConfig(){
-        String filePath = "../config.properties";
-        Properties properties = new Properties();
-        try(Writer writer = new FileWriter(filePath)){
-            properties.setProperty("pubSubjectStartTime", pubSubjectStartTime.toString());
-            properties.setProperty("pubSubjectEndTime", pubSubjectEndTime.toString());
-            properties.setProperty("selectSubjectStartTime", selectSubjectStartTime.toString());
-            properties.setProperty("selectSubjectEndTime", selectSubjectEndTime.toString());
-            properties.setProperty("uploadResultStartTime", uploadResultStartTime.toString());
-            properties.setProperty("uploadResultEndTime", uploadResultEndTime.toString());
-            properties.setProperty("pubGradeStartTime", pubGradeStartTime.toString());
-            properties.setProperty("pubGradeEndTime", pubGradeEndTime.toString());
-            properties.setProperty("checkInTime", checkInTime.toString());
-            properties.setProperty("checkOutTime", checkOutTime.toString());
-            properties.setProperty("checkInResetTime", checkInResetTime.toString());
+    public void UpdateConfig() {
+        DbUtils<WebConfigMapper> dbUtils = new DbUtils<>(WebConfigMapper.class);
+        dbUtils.mapper.UpdateConfig(this);
+        dbUtils.session.commit();
+        dbUtils.session.close();
+    }
 
-            properties.store(writer, "website-config");
-        } catch (Exception e){
-            e.printStackTrace();
-        }
+    // setter with Date
+    public void setPubSubjectStartTime(Date pubSubjectStartTime) {
+        this.pubSubjectStartTime = pubSubjectStartTime;
+    }
 
+    public void setPubSubjectEndTime(Date pubSubjectEndTime) {
+        this.pubSubjectEndTime = pubSubjectEndTime;
+    }
+
+    public void setSelectSubjectStartTime(Date selectSubjectStartTime) {
+        this.selectSubjectStartTime = selectSubjectStartTime;
+    }
+
+    public void setSelectSubjectEndTime(Date selectSubjectEndTime) {
+        this.selectSubjectEndTime = selectSubjectEndTime;
+    }
+
+    public void setUploadResultStartTime(Date uploadResultStartTime) {
+        this.uploadResultStartTime = uploadResultStartTime;
+    }
+
+    public void setUploadResultEndTime(Date uploadResultEndTime) {
+        this.uploadResultEndTime = uploadResultEndTime;
+    }
+
+    public void setPubGradeStartTime(Date pubGradeStartTime) {
+        this.pubGradeStartTime = pubGradeStartTime;
+    }
+
+    public void setPubGradeEndTime(Date pubGradeEndTime) {
+        this.pubGradeEndTime = pubGradeEndTime;
+    }
+
+    public void setCheckInTime(Date checkInTime) {
+        this.checkInTime = checkInTime;
+    }
+
+    public void setCheckOutTime(Date checkOutTime) {
+        this.checkOutTime = checkOutTime;
+    }
+
+    public void setCheckInResetTime(Date checkInResetTime) {
+        this.checkInResetTime = checkInResetTime;
     }
 
     public Date getPubSubjectStartTime() {
         return pubSubjectStartTime;
     }
 
+    // setter for String
     public void setPubSubjectStartTime(String pubSubjectStartTime) {
         this.pubSubjectStartTime = (new DateStringConverter().fromString(pubSubjectStartTime));
     }
