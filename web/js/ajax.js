@@ -179,6 +179,7 @@ function QueryStudentsForTeacher(context) {
     }
 }
 
+// 管理员查询系统控制时间回调函数
 function QueryControlTimeCallback(context) {
     var data = JSON.parse(context);
     $("#pubSubjectStartTime").val(convertDate(new Date(data.pubSubjectStartTime)));
@@ -194,6 +195,7 @@ function QueryControlTimeCallback(context) {
     $("#checkInResetTime").val(convertTime(new Date(data.checkInResetTime)));
 }
 
+// 日期格式转化函数
 function convertDate(date) {
     var str = "";
     str += date.getFullYear() + '-';
@@ -202,6 +204,7 @@ function convertDate(date) {
     return str
 }
 
+// 时间格式转化函数
 function convertTime(time) {
     var str = "";
     str += (time.getHours() < 10 ? '0' + time.getHours() : time.getHours()) + ':';
@@ -209,9 +212,92 @@ function convertTime(time) {
     return str;
 }
 
+// 学生查询系统控制时间回传函数
 function StudentQueryControlTimeCallback(context) {
     var data = JSON.parse(context);
     // 设置签到btn是否禁用
     var now = new Date();
     document.getElementById("btn-check-in").disable = (!(now.getHours() == new Date(data.CheckInTime).getHours()));
+}
+
+// 教师查询学生成绩回调函数
+function TeacherQueryGradeCallback(context) {
+    var data = JSON.parse(context);
+    data = data.grades;
+    var table = document.getElementById("studentGradeTable");
+    var len = table.rows.length;
+    for (var i = 2; i < len; i++) {
+        table.rows[2].remove();
+    }
+    for (var i = 0; i < data.length; i++) {
+        var row = table.insertRow();
+
+        var subject_name = document.createElement("input");
+        subject_name.setAttribute("name", "grades["+i+"].subject_name");
+        subject_name.setAttribute("type", "text");
+        subject_name.setAttribute("class", "table-input");
+        subject_name.value = data[i].subject_name;
+        subject_name.disabled = true;
+        var cell = row.insertCell(0);
+        cell.appendChild(subject_name);
+
+        var user_name = document.createElement("input");
+        user_name.setAttribute("name", "grades["+i+"].user_name");
+        user_name.setAttribute("type", "text");
+        user_name.value = data[i].user_name;
+        user_name.disabled = true;
+        user_name.setAttribute("class", "table-input");
+        var cell = row.insertCell(1);
+        cell.appendChild(user_name);
+
+        var grade_normal = document.createElement("input");
+        grade_normal.setAttribute("name", "grades["+i+"].grade_normal");
+        grade_normal.setAttribute("type", "number");
+        grade_normal.setAttribute("class", "table-input");
+        grade_normal.value = data[i].grade_normal;
+        grade_normal.disabled = true;
+        var cell = row.insertCell(2);
+        cell.appendChild(grade_normal);
+
+
+        var grade_selfjudge = document.createElement("input");
+        grade_selfjudge.setAttribute("name", "grades["+i+"].grade_selfjudge");
+        grade_selfjudge.setAttribute("type", "number");
+        grade_selfjudge.setAttribute("class", "table-input");
+        grade_selfjudge.value = data[i].grade_selfjudge;
+        grade_selfjudge.disabled = true;
+        var cell = row.insertCell(3);
+        cell.appendChild(grade_selfjudge);
+
+
+        var grade_test = document.createElement("input");
+        grade_test.setAttribute("name", "grades["+i+"].grade_test");
+        grade_test.setAttribute("type", "number");
+        grade_test.setAttribute("class", "table-input");
+        grade_test.value = data[i].grade_test;
+        var cell = row.insertCell(4);
+        cell.appendChild(grade_test);
+
+        var grade_final = document.createElement("input");
+        grade_final.setAttribute("name", "grades["+i+"].grade_final");
+        grade_final.setAttribute("type", "number");
+        grade_final.setAttribute("class", "table-input");
+        grade_final.value = data[i].grade_final;
+        grade_final.disabled = true;
+        var cell = row.insertCell(5);
+        cell.appendChild(grade_final);
+
+        var user_id = document.createElement("input");
+        user_id.setAttribute("name", "grades["+i+"].user_id");
+        user_id.value = data[i].user_id;
+        user_id.setAttribute("type","hidden");
+        cell.appendChild(user_id);
+
+        var subject_id = document.createElement("input");
+        subject_id.setAttribute("name", "grades["+i+"].subject_id");
+        subject_id.value = data[i].subject_id;
+        subject_id.setAttribute("type","hidden");
+        cell.appendChild(subject_id);
+    }
+
 }

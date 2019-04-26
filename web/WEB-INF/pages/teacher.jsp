@@ -1,6 +1,7 @@
 <%@ taglib prefix="s" uri="/struts-tags" %>
 <!DOCTYPE html>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <html xmlns="http://www.w3.org/1999/xhtml">
 
 <head>
@@ -27,6 +28,9 @@
             width: 70%;
             height: 100%;
 
+        }
+        .table-input{
+            width: 100px;
         }
     </style>
     <script src="/js/jquery-3.3.1.min.js"></script>
@@ -127,79 +131,6 @@
                                         <td>当前已选人数</td>
                                         </thead>
                                     </tr>
-                                    <%--<tr>--%>
-                                    <%--<td>--%>
-                                    <%--<!-- Button trigger modal -->--%>
-                                    <%--<button type="button" class="btn btn-primary btn-small"--%>
-                                    <%--data-toggle="modal" th:id=""--%>
-                                    <%--data-target="#courseUpdate" style="font-size:10px;">--%>
-                                    <%--修改课题--%>
-                                    <%--</button>--%>
-                                    <%--<!-- Modal -->--%>
-                                    <%--<div class="modal fade" id="courseUpdate" tabindex="-1" role="dialog"--%>
-                                    <%--aria-labelledby="myModalLabel" aria-hidden="true">--%>
-                                    <%--<div class="modal-dialog" role="document">--%>
-                                    <%--<div class="modal-content">--%>
-                                    <%--<div class="modal-header">--%>
-                                    <%--<button type="button" class="close" data-dismiss="modal"--%>
-                                    <%--aria-label="Close"><span--%>
-                                    <%--aria-hidden="true">&times;</span></button>--%>
-                                    <%--<h4 class="modal-title" id="myModalLabel">课题修改</h4>--%>
-                                    <%--</div>--%>
-                                    <%--<div class="modal-body">--%>
-                                    <%--<form>--%>
-                                    <%--<div class="form-group">--%>
-                                    <%--<label for="updateCourseName">课题名称</label>--%>
-                                    <%--<input type="text" class="form-control"--%>
-                                    <%--id="updateCourseName" placeholder="请输入课题名称">--%>
-                                    <%--</div>--%>
-                                    <%--</form>--%>
-                                    <%--</div>--%>
-                                    <%--<div class="modal-footer">--%>
-                                    <%--<button type="button" class="btn btn-default"--%>
-                                    <%--data-dismiss="modal">Close--%>
-                                    <%--</button>--%>
-                                    <%--<button type="button" class="btn btn-primary">修改--%>
-                                    <%--</button>--%>
-                                    <%--</div>--%>
-                                    <%--</div>--%>
-                                    <%--</div>--%>
-                                    <%--</div>--%>
-
-
-                                    <%--<!-- Button trigger modal -->--%>
-                                    <%--<button type="button" class="btn btn-primary btn-small"--%>
-                                    <%--data-toggle="modal"--%>
-                                    <%--data-target="#courseDelete" style="font-size:10px;">--%>
-                                    <%--删除课题--%>
-                                    <%--</button>--%>
-                                    <%--<!-- Modal -->--%>
-                                    <%--<div class="modal fade" id="courseDelete" tabindex="-1" role="dialog"--%>
-                                    <%--aria-labelledby="myModalLabel" aria-hidden="true">--%>
-                                    <%--<div class="modal-dialog" role="document">--%>
-                                    <%--<div class="modal-content">--%>
-                                    <%--<div class="modal-header">--%>
-                                    <%--<button type="button" class="close" data-dismiss="modal"--%>
-                                    <%--aria-label="Close"><span--%>
-                                    <%--aria-hidden="true">&times;</span></button>--%>
-                                    <%--<h4 class="modal-title" id="myModalLabelText">课题删除</h4>--%>
-                                    <%--</div>--%>
-                                    <%--<div class="modal-body">--%>
-                                    <%--是否删除该课题--%>
-                                    <%--</div>--%>
-                                    <%--<div class="modal-footer">--%>
-                                    <%--<button type="button" class="btn btn-default"--%>
-                                    <%--data-dismiss="modal">Close--%>
-                                    <%--</button>--%>
-                                    <%--<button type="button" class="btn btn-primary">删除--%>
-                                    <%--</button>--%>
-                                    <%--</div>--%>
-                                    <%--</div>--%>
-                                    <%--</div>--%>
-                                    <%--</div>--%>
-                                    <%--</td>--%>
-                                    <%--</tr>--%>
-
                                 </table>
 
                             </div>
@@ -256,25 +187,19 @@
                                 </div>
 
                                 <!-- Table -->
-                                <table class="table">
-                                    <tr>
+                                <form:form action="/Grade/pubGrade" method="post" modelAttribute="gradeList">
+                                <table class="table table-striped table-bordered table-hover" id="studentGradeTable">
+                                        <thead>
                                         <td>课题名称</td>
                                         <td>学生</td>
-                                        <td>平时成绩</td>
-                                        <td>期末成绩</td>
-                                        <td>录入</td>
-                                    </tr>
-                                    <tr>
-                                        <td>基于SSH的二维码线上点餐系统</td>
-                                        <td>Impassive</td>
-                                        <td><input type="text" value="90" style="width:50px;"></td>
-                                        <td><input type="text" value="90" style="width:50px;"></td>
-                                        <td>
-                                            <button class="btn-primary">录入</button>
-                                        </td>
-                                    </tr>
-                                    <tr></tr>
+                                        <td>平时成绩（不可修改，系统自动计算）</td>
+                                        <td>自评成绩</td>
+                                        <td>测试成绩</td>
+                                        <td>最终成绩（不可修改，系统自动计算）</td>
+                                        </thead>
                                 </table>
+                                    <input type="submit" class="btn btn-primary" />
+                                </form:form>
                             </div>
                         </div>
                         <div role="tabpanel" class="tab-pane" id="settings">
@@ -320,6 +245,10 @@
         $(this).tab('show')
         if (e.currentTarget.innerText == '查看学生选题') {
             ajax("/Subject/SelectStudentsForTeacher?userId=" +${user.userId}, QueryStudentsForTeacher, "GET");
+        }
+
+        if (e.currentTarget.innerText == '学生成绩录入'){
+            ajax("/Grade/teacherQueryGrade", TeacherQueryGradeCallback, "GET");
         }
 
     });

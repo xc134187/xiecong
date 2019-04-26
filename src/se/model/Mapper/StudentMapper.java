@@ -27,6 +27,4 @@ public interface StudentMapper {
     // 获取个人信息
     Student QuerySelfInfo(String userid);
 
-    // 查询成绩
-    List<Grade> QueryGrade(String userId);
 }

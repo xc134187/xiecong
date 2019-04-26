@@ -7,8 +7,17 @@
 package se.model;
 
 public class Grade {
-    float grade_normal, grade_final, grade_selfjudge;
-    String user_id, user_name, subject_id, subject_name;
+    private float grade_normal, grade_test,grade_final, grade_selfjudge;
+    private String user_id, user_name, subject_id, subject_name;
+
+
+    public float getGrade_test() {
+        return grade_test;
+    }
+
+    public void setGrade_test(float grade_test) {
+        this.grade_test = grade_test;
+    }
 
     public float getGrade_normal() {
         return grade_normal;
