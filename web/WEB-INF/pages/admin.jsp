@@ -116,20 +116,21 @@
                                     系统流程控制管理
                                 </div>
                                 <div class="panel-body">
+                                    <form action="/Admin/UpdateControl" method="post">
                                     <div class="form-horizontal">
                                         <span>课题发布时间</span><br />
                                         <div>
                                             <div class="form-group">
                                                 <label class="col-sm-2 control-label" for="pubSubjectStartTime">开始时间</label>
                                                 <div class="col-sm-10">
-                                                <input type="date" class="form-control"
+                                                <input type="date" class="form-control" name="pubSubjectStartTime"
                                                        id="pubSubjectStartTime">
                                                 </div>
                                             </div>
                                             <div class="form-group">
                                                 <label class="col-sm-2 control-label"  for="pubSubjectEndTime">结束时间</label>
                                                 <div class="col-sm-10">
-                                                <input type="date" class="form-control"
+                                                <input type="date" class="form-control" name="pubSubjectEndTime"
                                                        id="pubSubjectEndTime" >
                                                 </div>
                                                 </div>
@@ -141,14 +142,14 @@
                                             <div class="form-group">
                                                 <label class="col-sm-2 control-label"  for="selectSubjectStartTime">开始时间</label>
                                                 <div class="col-sm-10">
-                                                <input type="date" class="form-control"
+                                                <input type="date" class="form-control" name="selectSubjectStartTime"
                                                        id="selectSubjectStartTime">
                                                 </div>
                                                 </div>
                                             <div class="form-group">
                                                 <label class="col-sm-2 control-label"  for="selectSubjectEndTime">结束时间</label>
                                                 <div class="col-sm-10">
-                                                <input type="date" class="form-control"
+                                                <input type="date" class="form-control" name="selectSubjectEndTime"
                                                        id="selectSubjectEndTime" >
                                                 </div>
                                             </div>
@@ -160,14 +161,14 @@
                                             <div class="form-group">
                                                 <label class="col-sm-2 control-label"  for="uploadResultStartTime">开始时间</label>
                                                 <div class="col-sm-10">
-                                                <input type="date" class="form-control"
+                                                <input type="date" class="form-control" name="uploadResultStartTime"
                                                        id="uploadResultStartTime">
                                                 </div>
                                             </div>
                                             <div class="form-group">
                                                 <label class="col-sm-2 control-label"  for="uploadResultEndTime">结束时间</label>
                                                 <div class="col-sm-10">
-                                                <input type="date" class="form-control"
+                                                <input type="date" class="form-control" name="uploadResultEndTime"
                                                        id="uploadResultEndTime" >
                                                 </div>
                                             </div>
@@ -179,22 +180,46 @@
                                             <div class="form-group">
                                                 <label class="col-sm-2 control-label"  for="pubGradeStartTime">开始时间</label>
                                                 <div class="col-sm-10">
-                                                <input type="date" class="form-control"
+                                                <input type="date" class="form-control" name="pubGradeStartTime"
                                                        id="pubGradeStartTime">
                                                 </div>
                                             </div>
                                             <div class="form-group">
                                                 <label class="col-sm-2 control-label"  for="pubGradeEndTime">结束时间</label>
                                                 <div class="col-sm-10">
-                                                <input type="date" class="form-control"
+                                                <input type="date" class="form-control" name="pubGradeEndTime"
                                                        id="pubGradeEndTime" >
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                    <button class="col-sm-offset-2 btn btn-primary">提交</button>
+                                    <div class="form-horizontal">
+                                        <span>签到时间管理</span><br />
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label" for="checkInTime">签到时间</label>
+                                        <div class="col-sm-10">
+                                            <input type="time" class="form-control" name="checkInTime"
+                                                   id="checkInTime">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label"  for="checkOutTime">签退时间</label>
+                                        <div class="col-sm-10">
+                                            <input type="time" class="form-control" name="checkOutTime"
+                                                   id="checkOutTime" >
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label"  for="checkInResetTime">重置时间</label>
+                                        <div class="col-sm-10">
+                                            <input type="time" class="form-control" name="checkInResetTime"
+                                                   id="checkInResetTime" >
+                                        </div>
+                                    </div>
+                                    </div>
+                                    <input type="submit" class="col-sm-offset-2 btn btn-primary" value="提交">
+                                </form>
                                 </div>
-
                             </div>
                         </div>
                         <%-- 签到时间控制 --%>
@@ -206,27 +231,7 @@
                                     <div class="form-horizontal">
                                         <span>签到时间管理</span><br />
                                         <div>
-                                            <div class="form-group">
-                                                <label class="col-sm-2 control-label" for="checkInTime">签到时间</label>
-                                                <div class="col-sm-10">
-                                                    <input type="time" class="form-control"
-                                                           id="checkInTime">
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <label class="col-sm-2 control-label"  for="checkOutTime">签退时间</label>
-                                                <div class="col-sm-10">
-                                                    <input type="time" class="form-control"
-                                                           id="checkOutTime" >
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <label class="col-sm-2 control-label"  for="checkInResetTime">重置时间</label>
-                                                <div class="col-sm-10">
-                                                    <input type="time" class="form-control"
-                                                           id="checkInResetTime" >
-                                                </div>
-                                            </div>
+
                                             <button class="col-sm-offset-2 btn btn-primary" >提交</button>
                                         </div>
                                     </div>
@@ -320,5 +325,7 @@
         e.className = "active";
 
     }
+
+    ajax("/Admin/controlTime", QueryControlTimeCallback, "GET");
 </script>
 </html>

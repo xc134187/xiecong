@@ -174,3 +174,36 @@ function QueryStudentsForTeacher(context) {
         row.insertCell(3).innerHTML = "<a href=" + url + "> 下载</a>";
     }
 }
+
+
+
+
+function QueryControlTimeCallback(context) {
+    var data = JSON.parse(context);
+    $("#pubSubjectStartTime").val(convertDate(new Date(data.pubSubjectStartTime)));
+    $("#pubSubjectEndTime").val(convertDate(new Date(data.pubSubjectEndTime)));
+    $("#selectSubjectStartTime").val(convertDate(new Date(data.selectSubjectStartTime)));
+    $("#selectSubjectEndTime").val(convertDate(new Date(data.selectSubjectEndTime)));
+    $("#uploadResultStartTime").val(convertDate(new Date(data.uploadResultStartTime)));
+    $("#uploadResultEndTime").val(convertDate(new Date(data.uploadResultEndTime)));
+    $("#pubGradeStartTime").val(convertDate(new Date(data.pubGradeStartTime)));
+    $("#pubGradeEndTime").val(convertDate(new Date(data.pubGradeEndTime)));
+    $("#checkInTime").val(convertTime( new Date(data.checkInTime)));
+    $("#checkOutTime").val(convertTime(new Date(data.checkOutTime)));
+    $("#checkInResetTime").val(convertTime(new Date(data.checkInResetTime)));
+}
+
+function convertDate(date) {
+    var str = "";
+    str += date.getFullYear()+'-';
+    str += ((date.getMonth() + 1) < 10 ? '0'+(date.getMonth() + 1):date.getMonth() + 1)+'-';
+    str += (date.getDate() < 10 ? '0' + date.getDate(): date.getDate());
+    return str
+}
+
+function convertTime(time) {
+    var str = "";
+    str += (time.getHours() < 10 ? '0'+time.getHours():time.getHours())+':';
+    str += (time.getMinutes() < 10 ) ? '0' + time.getMinutes(): time.getMinutes();
+    return str;
+}

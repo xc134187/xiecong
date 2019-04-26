@@ -8,9 +8,13 @@ package se.model;
 
 import javafx.util.converter.DateStringConverter;
 
+import java.io.FileInputStream;
+import java.io.FileWriter;
+import java.io.Writer;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Properties;
 
 public class WebsiteConfig {
     private Date pubSubjectStartTime;
@@ -25,6 +29,29 @@ public class WebsiteConfig {
     private Date checkInTime;
     private Date checkOutTime;
     private Date checkInResetTime;
+
+    public void WriteConfig(){
+        String filePath = "../config.properties";
+        Properties properties = new Properties();
+        try(Writer writer = new FileWriter(filePath)){
+            properties.setProperty("pubSubjectStartTime", pubSubjectStartTime.toString());
+            properties.setProperty("pubSubjectEndTime", pubSubjectEndTime.toString());
+            properties.setProperty("selectSubjectStartTime", selectSubjectStartTime.toString());
+            properties.setProperty("selectSubjectEndTime", selectSubjectEndTime.toString());
+            properties.setProperty("uploadResultStartTime", uploadResultStartTime.toString());
+            properties.setProperty("uploadResultEndTime", uploadResultEndTime.toString());
+            properties.setProperty("pubGradeStartTime", pubGradeStartTime.toString());
+            properties.setProperty("pubGradeEndTime", pubGradeEndTime.toString());
+            properties.setProperty("checkInTime", checkInTime.toString());
+            properties.setProperty("checkOutTime", checkOutTime.toString());
+            properties.setProperty("checkInResetTime", checkInResetTime.toString());
+
+            properties.store(writer, "website-config");
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+
+    }
 
     public Date getPubSubjectStartTime() {
         return pubSubjectStartTime;
