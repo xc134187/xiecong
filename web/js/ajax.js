@@ -233,7 +233,7 @@ function TeacherQueryGradeCallback(context) {
         var row = table.insertRow();
 
         var subject_name = document.createElement("input");
-        subject_name.setAttribute("name", "grades["+i+"].subject_name");
+        subject_name.setAttribute("name", "grades[" + i + "].subject_name");
         subject_name.setAttribute("type", "text");
         subject_name.setAttribute("class", "table-input");
         subject_name.value = data[i].subject_name;
@@ -242,7 +242,7 @@ function TeacherQueryGradeCallback(context) {
         cell.appendChild(subject_name);
 
         var user_name = document.createElement("input");
-        user_name.setAttribute("name", "grades["+i+"].user_name");
+        user_name.setAttribute("name", "grades[" + i + "].user_name");
         user_name.setAttribute("type", "text");
         user_name.value = data[i].user_name;
         user_name.disabled = true;
@@ -251,7 +251,7 @@ function TeacherQueryGradeCallback(context) {
         cell.appendChild(user_name);
 
         var grade_normal = document.createElement("input");
-        grade_normal.setAttribute("name", "grades["+i+"].grade_normal");
+        grade_normal.setAttribute("name", "grades[" + i + "].grade_normal");
         grade_normal.setAttribute("type", "number");
         grade_normal.setAttribute("class", "table-input");
         grade_normal.value = data[i].grade_normal;
@@ -261,7 +261,7 @@ function TeacherQueryGradeCallback(context) {
 
 
         var grade_selfjudge = document.createElement("input");
-        grade_selfjudge.setAttribute("name", "grades["+i+"].grade_selfjudge");
+        grade_selfjudge.setAttribute("name", "grades[" + i + "].grade_selfjudge");
         grade_selfjudge.setAttribute("type", "number");
         grade_selfjudge.setAttribute("class", "table-input");
         grade_selfjudge.value = data[i].grade_selfjudge;
@@ -271,7 +271,7 @@ function TeacherQueryGradeCallback(context) {
 
 
         var grade_test = document.createElement("input");
-        grade_test.setAttribute("name", "grades["+i+"].grade_test");
+        grade_test.setAttribute("name", "grades[" + i + "].grade_test");
         grade_test.setAttribute("type", "number");
         grade_test.setAttribute("class", "table-input");
         grade_test.value = data[i].grade_test;
@@ -279,7 +279,7 @@ function TeacherQueryGradeCallback(context) {
         cell.appendChild(grade_test);
 
         var grade_final = document.createElement("input");
-        grade_final.setAttribute("name", "grades["+i+"].grade_final");
+        grade_final.setAttribute("name", "grades[" + i + "].grade_final");
         grade_final.setAttribute("type", "number");
         grade_final.setAttribute("class", "table-input");
         grade_final.value = data[i].grade_final;
@@ -288,15 +288,15 @@ function TeacherQueryGradeCallback(context) {
         cell.appendChild(grade_final);
 
         var user_id = document.createElement("input");
-        user_id.setAttribute("name", "grades["+i+"].user_id");
+        user_id.setAttribute("name", "grades[" + i + "].user_id");
         user_id.value = data[i].user_id;
-        user_id.setAttribute("type","hidden");
+        user_id.setAttribute("type", "hidden");
         cell.appendChild(user_id);
 
         var subject_id = document.createElement("input");
-        subject_id.setAttribute("name", "grades["+i+"].subject_id");
+        subject_id.setAttribute("name", "grades[" + i + "].subject_id");
         subject_id.value = data[i].subject_id;
-        subject_id.setAttribute("type","hidden");
+        subject_id.setAttribute("type", "hidden");
         cell.appendChild(subject_id);
     }
 

@@ -7,7 +7,10 @@
 package se.Controller;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import se.model.GradeList;
 import se.model.Mapper.GradeMapper;
 import se.model.User;
@@ -19,7 +22,7 @@ import javax.servlet.http.HttpSession;
 @RequestMapping("Grade")
 public class GradeController {
     @RequestMapping(value = "pubGrade", method = RequestMethod.POST)
-    public void PubGrade(@ModelAttribute("gradeList") GradeList gradeList){
+    public void PubGrade(@ModelAttribute("gradeList") GradeList gradeList) {
         DbUtils<GradeMapper> dbUtils = new DbUtils<>(GradeMapper.class);
         dbUtils.mapper.UpdateStudentGrade(gradeList.getGrades());
         dbUtils.session.commit();
@@ -29,9 +32,9 @@ public class GradeController {
     // 通过教师ID查看成绩
     @RequestMapping("teacherQueryGrade")
     @ResponseBody
-    public GradeList TeacherQueryGrade(HttpSession session){
-        User user = (User)session.getAttribute("user");
-        if(user.getRole() == 1){
+    public GradeList TeacherQueryGrade(HttpSession session) {
+        User user = (User) session.getAttribute("user");
+        if (user.getRole() == 1) {
             DbUtils<GradeMapper> dbUtils = new DbUtils<>(GradeMapper.class);
             GradeList gradeList = new GradeList();
             gradeList.setGrades(dbUtils.mapper.TeacherQueryGrade(user.getUserId()));

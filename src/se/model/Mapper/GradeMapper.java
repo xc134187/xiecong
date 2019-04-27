@@ -6,13 +6,19 @@
 
 package se.model.Mapper;
 
+import org.apache.ibatis.annotations.Param;
 import se.model.Grade;
-import se.model.GradeList;
 
 import java.util.List;
 
 public interface GradeMapper {
     // 查询成绩
     List<Grade> TeacherQueryGrade(String userId);
+
     int UpdateStudentGrade(List<Grade> gradeList);
+
+    int Grade_selfjudge(@Param(value = "grade") float greade,
+                        @Param(value = "userId") String userId);
+
+    int CalcGradeNormal();
 }

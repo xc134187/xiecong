@@ -29,7 +29,8 @@
             height: 100%;
 
         }
-        .table-input{
+
+        .table-input {
             width: 100px;
         }
     </style>
@@ -188,7 +189,8 @@
 
                                 <!-- Table -->
                                 <form:form action="/Grade/pubGrade" method="post" modelAttribute="gradeList">
-                                <table class="table table-striped table-bordered table-hover" id="studentGradeTable">
+                                    <table class="table table-striped table-bordered table-hover"
+                                           id="studentGradeTable">
                                         <thead>
                                         <td>课题名称</td>
                                         <td>学生</td>
@@ -197,8 +199,8 @@
                                         <td>测试成绩</td>
                                         <td>最终成绩（不可修改，系统自动计算）</td>
                                         </thead>
-                                </table>
-                                    <input type="submit" class="btn btn-primary" />
+                                    </table>
+                                    <input type="submit" class="btn btn-primary"/>
                                 </form:form>
                             </div>
                         </div>
@@ -247,7 +249,7 @@
             ajax("/Subject/SelectStudentsForTeacher?userId=" +${user.userId}, QueryStudentsForTeacher, "GET");
         }
 
-        if (e.currentTarget.innerText == '学生成绩录入'){
+        if (e.currentTarget.innerText == '学生成绩录入') {
             ajax("/Grade/teacherQueryGrade", TeacherQueryGradeCallback, "GET");
         }
 

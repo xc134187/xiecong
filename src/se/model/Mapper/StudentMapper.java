@@ -6,10 +6,7 @@
 
 package se.model.Mapper;
 
-import se.model.Grade;
 import se.model.Student;
-
-import java.util.List;
 
 public interface StudentMapper {
     // 签到
@@ -21,10 +18,9 @@ public interface StudentMapper {
     // 签退
     int CheckOut(String userid);
 
-    // 成绩自评
-    int SelfJudge(float grade, String userId, int subjectId);
+    // 重置签到时间
+    int CheckInReset();
 
     // 获取个人信息
     Student QuerySelfInfo(String userid);
-
 }

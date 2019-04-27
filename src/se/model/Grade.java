@@ -7,7 +7,7 @@
 package se.model;
 
 public class Grade {
-    private float grade_normal, grade_test,grade_final, grade_selfjudge;
+    private float grade_normal, grade_test, grade_final, grade_selfjudge;
     private String user_id, user_name, subject_id, subject_name;
 
 

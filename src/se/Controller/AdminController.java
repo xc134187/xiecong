@@ -15,7 +15,9 @@ import se.listener.StartupListener;
 import se.model.User;
 import se.model.WebsiteConfig;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.io.IOException;
 import java.text.ParseException;
 
 @Controller
@@ -33,7 +35,9 @@ public class AdminController {
                                   @RequestParam String checkInTime,
                                   @RequestParam String checkOutTime,
                                   @RequestParam String checkInResetTime,
-                                  HttpSession session) throws ParseException {
+                                  HttpServletResponse response,
+                                  HttpSession session) throws ParseException, IOException {
+        response.setHeader("Content-type", "text/html;charset=UTF-8");
         User user = (User) session.getAttribute("user");
         if (user != null && user.getRole() == 3) {
             StartupListener.config.setPubSubjectStartTime(pubSubjectStartTime);
@@ -48,6 +52,13 @@ public class AdminController {
             StartupListener.config.setCheckOutTime(checkOutTime);
             StartupListener.config.setCheckInResetTime(checkInResetTime);
             StartupListener.config.UpdateConfig();
+
+            StartupListener.OnResetTimeChanged(StartupListener.config.getCheckInResetTime());
+            StartupListener.OnUploadResultEndTimeChanged(StartupListener.config.getUploadResultEndTime());
+
+            response.getWriter().write("<script>alert('保存成功');window.location.href='/FormMain'</script>");
+        } else {
+            response.getWriter().write("<script>alert('保存失败，仅限管理员使用！');window.location.href='/FormMain'</script>");
         }
     }
 

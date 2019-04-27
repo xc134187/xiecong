@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import se.listener.StartupListener;
+import se.model.Mapper.GradeMapper;
 import se.model.Mapper.SubjectMapper;
 import se.model.Subject;
 import se.model.User;
@@ -159,6 +160,7 @@ public class SubjectController {
     // 成果上传
     @RequestMapping(value = "Upload", method = RequestMethod.POST)
     public void Upload(@RequestParam MultipartFile file,
+                       @RequestParam float grade_selfjudge,
                        HttpServletRequest request,
                        HttpServletResponse response,
                        HttpSession session) throws IOException {
@@ -177,8 +179,10 @@ public class SubjectController {
                     file.transferTo(new File(storePath + File.separator + fileName));//把文件写入目标文件地址
                     String url = "/Download?filename=" + fileName;
                     DbUtils<SubjectMapper> dbUtils = new DbUtils<>(SubjectMapper.class);
-
-                    dbUtils.mapper.UploadResult(url, ((User) session.getAttribute("user")).getUserId());
+                    User user = (User) session.getAttribute("user");
+                    dbUtils.mapper.UploadResult(url, user.getUserId());
+                    GradeMapper mapper = dbUtils.session.getMapper(GradeMapper.class);
+                    mapper.Grade_selfjudge(grade_selfjudge, user.getUserId());
                     dbUtils.session.commit();
                     dbUtils.session.close();
                     response.getWriter().write("<script>alert('文件上传成功');window.location.href='/FormMain'</script>");
@@ -186,7 +190,6 @@ public class SubjectController {
                     e.printStackTrace();
                     response.getWriter().write("<script>alert('文件上传失败！');window.location.href='/FormMain'</script>");
                 }
-
             }
         } else {
             response.getWriter().write("<script>alert('现在还不是提交成果的时间！');window.location.href='/FormMain'</script>");

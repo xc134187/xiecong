@@ -169,6 +169,7 @@
                                         <label class="uploadFile" for="upload">
                                             成果上传
                                         </label>
+                                        <input type="number" name="grade_selfjudge"/>
                                         <input type="file" name="file" id='upload'/>
                                         <input class="btn btn-primary" type="submit"/>
                                     </form>
@@ -225,21 +226,17 @@
                                         <td>#</td>
                                         <td>签到时间</td>
                                         <td>签退时间</td>
-
                                     </tr>
                                     <tr>
                                         <td>1</td>
                                         <td>0:0:0</td>
                                         <td>12:0:0</td>
-
                                     </tr>
                                 </table>
                             </div>
                         </div>
                     </div>
-
                 </div>
-
             </div>
         </div>
     </div>

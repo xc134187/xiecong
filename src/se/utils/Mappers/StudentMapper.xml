@@ -17,12 +17,6 @@
         <result column="student_class" property="tclass"/>
         <result column="student_sex" property="sex"/>
     </resultMap>
-    <update id="SelfJudge">
-        update Student_select_subject
-        set grade_selfjudge = #{0}
-        where user_id = #{1}
-          and subject_id = #{2};
-    </update>
     <update id="CheckIn" parameterType="string">
         update Check_in
         set today_checked_in = 1
@@ -39,21 +33,14 @@
         from Check_in
         where user_id = #{userid};
     </select>
-    <select id="QueryGrade" parameterType="string" resultMap="Grade">
-        select grade_normal,
-               grade_selfjudge,
-               grade__final,
-               user_name,
-               Student_select_subject.user_id,
-               Student_select_subject.subject_id,
-               subject_name
-        from Student_select_subject,
-             Subjects,
-             Users
-        where Subjects.subject_id = Student_select_subject.subject_id
-          and Users.user_id = Student_select_subject.user_id
-          and Student_select_subject.user_id = #{userId};
-    </select>
+
+    <update id="CheckInReset">
+        update Check_in
+        set today_checked_in = false,
+            totol_time       = totol_time + 1
+        where 1 = 1
+        limit 100;
+    </update>
 
     <select id="QuerySelfInfo" resultMap="StudentInfo">
         select student_sex, student_class

@@ -5,19 +5,28 @@
 
 <mapper namespace="se.model.Mapper.GradeMapper">
     <resultMap id="Grade" type="se.model.Grade">
-        <result column="user_name" property="user_name" />
-        <result column="user_id" property="user_id" />
-        <result column="subject_id" property="subject_id" />
-        <result column="subject_name" property="subject_name" />
-        <result column="grade_normal" property="grade_normal" />
-        <result column="grade_test" property="grade_test" />
-        <result column="grade_final" property="grade_final" />
-        <result column="grade_selfjudge" property="grade_selfjudge" />
+        <result column="user_name" property="user_name"/>
+        <result column="user_id" property="user_id"/>
+        <result column="subject_id" property="subject_id"/>
+        <result column="subject_name" property="subject_name"/>
+        <result column="grade_normal" property="grade_normal"/>
+        <result column="grade_test" property="grade_test"/>
+        <result column="grade_final" property="grade_final"/>
+        <result column="grade_selfjudge" property="grade_selfjudge"/>
     </resultMap>
     <select id="TeacherQueryGrade" resultMap="Grade">
-        select Users.user_name, Users.user_id, Subjects.subject_id, Subjects.subject_name,
-               grade_normal, grade_test, grade_selfjudge, grade_final
-        from Users, Student_select_subject, Subjects, Teacher_Pub_Subject
+        select Users.user_name,
+               Users.user_id,
+               Subjects.subject_id,
+               Subjects.subject_name,
+               grade_normal,
+               grade_test,
+               grade_selfjudge,
+               grade_final
+        from Users,
+             Student_select_subject,
+             Subjects,
+             Teacher_Pub_Subject
         where Student_select_subject.user_id = Users.user_id
           and Student_select_subject.subject_id = Subjects.subject_id
           and Teacher_Pub_Subject.subject_id = Subjects.subject_id
@@ -30,5 +39,17 @@
             set grade_test=#{grade.grade_test}, grade_final=grade_normal*0.3+grade_test*0.7
             where user_id=#{grade.user_id} and subject_id=#{grade.subject_id};
         </foreach>
+    </update>
+
+    <update id="Grade_selfjudge">
+        update Student_select_subject
+        set grade_selfjudge = #{grade}
+        where user_id = #{userId};
+    </update>
+
+    <update id="CalcGradeNormal">
+        update Student_select_subject s, Check_in c
+        set s.grade_normal = 30 * (c.times / c.totol_time)
+        where s.user_id = c.user_id;
     </update>
 </mapper>
