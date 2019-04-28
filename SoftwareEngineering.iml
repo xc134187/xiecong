@@ -42,5 +42,6 @@
     <orderEntry type="library" name="jdbc" level="application" />
     <orderEntry type="library" name="org.mybatis:mybatis:3.5.1" level="project" />
     <orderEntry type="library" name="commons-fileupload:commons-fileupload:1.4" level="project" />
+    <orderEntry type="library" name="jstl-1.2" level="project" />
   </component>
 </module>

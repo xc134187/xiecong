@@ -16,7 +16,7 @@ public class CalcGradeNormalThread extends Thread {
     private String threadName;
 
     public CalcGradeNormalThread(Date CalcTime, String ThreadName) {
-        System.out.println("ResetTime: " + CalcTime.getHours() + ":" + CalcTime.getMinutes());
+        System.out.println("ResetTime: " + (CalcTime.getMonth() + 1) + "-" + CalcTime.getDate());
         calcTime = CalcTime;
         threadName = ThreadName;
     }

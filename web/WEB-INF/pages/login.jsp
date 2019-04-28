@@ -38,7 +38,7 @@
         <h1>攀枝花学院课程设计管理系统</h1>
         <nav class="codrops-demos">
             <span>点击 <strong>"news"</strong> 查看全部通知</span>
-            <a href="#">news</a>
+            <a href="/Notify">news</a>
         </nav>
         <div id="notifications">
             <%--<c:forEach items="${news}" var="news">--%>

@@ -7,16 +7,16 @@
 package se.Controller;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import se.model.Mapper.NotificationMapper;
 import se.model.Notification;
 import se.model.User;
 import se.utils.DbUtils;
+import sun.awt.SunHints;
 
+import javax.jws.WebParam;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -36,10 +36,11 @@ public class NotifyController {
      * @return page
      */
     @RequestMapping("/Notify")
-    public String AllNotify() {
+    public String AllNotify(Model model) {
         DbUtils<NotificationMapper> dbUtils = new DbUtils<>(NotificationMapper.class);
         List<Notification> notifications = (dbUtils.mapper).selectAll();
-        return null;
+        model.addAttribute("notifications", notifications);
+        return "news";
     }
 
     /**
@@ -97,7 +98,7 @@ public class NotifyController {
             Notification notification = new Notification();
             notification.setTime(time);
             notification.setTitle(title);
-            String context = (url == null) ? text : text + "<br />附件<a href='" + url + "'></a>";
+            String context = (url == null) ? text : text + "<br /><a href=\"" + url + "\">下载附件</a>";
             notification.setContext(context);
 
             DbUtils<NotificationMapper> dbUtils = new DbUtils<>(NotificationMapper.class);
@@ -108,5 +109,15 @@ public class NotifyController {
 
         }
         response.getWriter().write("<script>alert('通知发布成功！！！');window.location.href='/FormMain';</script>");
+    }
+
+
+    @RequestMapping(value = "/Notify/Notify/{id}")
+    public String NotifyDetail(@PathVariable int id, Model model) {
+        DbUtils<NotificationMapper> dbUtils = new DbUtils<>(NotificationMapper.class);
+        Notification notification = dbUtils.mapper.select(id);
+        model.addAttribute("Title", notification.getTitle());
+        model.addAttribute("context", notification.getContext());
+        return "notification_detail";
     }
 }
